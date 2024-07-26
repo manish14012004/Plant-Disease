@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="my-4">
+    <h1 style="text-align: center; font-size: 3em; font-family: 'Arial', sans-serif; color: #255627; height: 150px; line-height: 150px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); font-weight: bold;">S E L E C T P L A N T</h1>
+
+    <!--these is the code for the boxes of detection-->
+<div class="mt-4" style="text-align: center;">
+    <div class="button-box" style="display: inline-block; margin: 30px;">
+      <a href="{{ url_for('tomato_disease_detection') }}" class="btn btn-primary image-button" style="background-image: url('https://th.bing.com/th/id/OIP.wEUDafUut5ckEZ_ILLHm_wHaE8?rs=1&pid=ImgDetMain'); background-size: cover; background-position: center; width: 200px; height: 200px; display: block; position: relative; overflow: hidden;padding: 20px;">
+        <span class="button-text">TOMATO DISEASE</span>
+      </a>
+    </div>
+    
+  
+    <div class="button-box" style="display: inline-block; margin: 30px;">
+      <a href="{{ url_for('potato_disease_detection') }}" class="btn btn-secondary image-button" style="background-image: url('https://th.bing.com/th/id/R.7dcfab839a8887625166f23cd4d62de6?rik=FBi%2fmS2gT49C0w&riu=http%3a%2f%2fwww.texilaconnect.com%2fwp-content%2fuploads%2f2014%2f06%2fpotato-plant.jpg&ehk=BhOVUCIsckIvzgf4eHlLxbNULKMK9%2f%2flR%2f6utEraFEc%3d&risl=&pid=ImgRaw&r=0'); background-size: cover; background-position: center; width: 200px; height: 200px; display: block; position: relative; overflow: hidden;padding: 20px;">
+        <span class="button-text">POTATO DISEASE</span>
+        </a>
+        </div>
+  
+        <div class="button-box" style="display: inline-block; margin: 30px;">
+          <a href="{{ url_for('corn_disease_detection') }}" class="btn btn-primary image-button" style="background-image: url('https://plantura.garden/uk/wp-content/uploads/sites/2/2022/04/corn-cob-1024x683.jpg?x96810'); background-size: cover; background-position: center; width: 200px; height: 200px; display: block; position: relative; overflow: hidden;padding: 20px;">
+            <span class="button-text">CORN DISEASE</span>
+          </a>
+          </div>
+        
+        <div class="button-box" style="display: inline-block; margin: 30px;">
+          <a href="{{ url_for('pepper_disease_detection') }}" class="btn btn-primary image-button" style="background-image: url('https://hortzone.com/wp-content/uploads/2021/04/15-Types-of-Pepper-Plants-to-Grow-in-Your-Garden.jpg'); background-size: cover; background-position: center; width: 200px; height: 200px; display: block; position: relative; overflow: hidden;padding: 20px;">
+            <span class="button-text">PEPPER DISEASE</span>
+          </a>
+        </div>    
+      
+  
+  
+  <style>
+     body {
+      background-color: #ffffff; /* Light grey background color */
+    }
+    .zoomable {
+      transition: transform 0.5s ease-in-out;
+    }
+  
+    .zoomable:hover {
+      transform: scale(1.1);
+    }
+  
+    .button-box {
+      position: relative;
+      overflow: hidden;
+      transition: background-color 0.3es;
+    }
+  
+    .button-box:hover {
+      background-color: black;
+    }
+  
+    .image-button {
+      text-decoration: none;
+      color: transparent; /* Hide text */
+      transition: transform 0.3s ease;
+      display: block; /* Ensure the button covers the entire box */
+    }
+  
+    .image-button:hover {
+      transform: scale(1.1);
+    }
+  
+    .button-text {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-weight: bold;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      transition: background-color 0.3s ease;
+    }
+  
+    .image-button:hover .button-text {
+      background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+    }
+  </style>
+</header>
+{% endblock %}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side-by-Side Containers</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body {
+            background-image: url('{{ url_for('static', filename='images/image4.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 90%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .left-container, .right-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .left-container {
+            background-color: rgba(246, 239, 239, 0.8);
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .right-container {
+            background-color: rgba(241, 235, 235, 0.8);
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+            margin: 20px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Optionally add header content here -->
+    </header>
+    <div class="container">
+        <div class="left-container">
+            <button onclick="showContent()">L E A F</button>
+            <button onclick="showContent()">S T E M / R O O T</button>
+        </div>
+        <div class="right-container" id="right-container" >
+        <img src="static/images/image5.png" alt="A beautiful landscape" width = "150" height = "150">
+        </div>
+    </div>
+
+    <script>
+        function showContent() {
+            const rightContainer = document.getElementById('right-container');
+            rightContainer.style.animation = 'none'; // Reset animation
+            void rightContainer.offsetWidth; // Trigger reflow
+            rightContainer.style.animation = 'fadeIn 1s ease-in-out';
+
+            rightContainer.innerHTML = `
+                <h1>Corn Disease Detection</h1>
+                <form action="{{ url_for('corn_predict') }}" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file">
+                    <button type="submit">Upload</button>
+                </form>
+                {% if prediction %}
+                <div class="result">
+                    <h2>Prediction: {{ prediction }}</h2>
+                    <img src="{{ url_for('static', filename=image_path) }}" alt="Uploaded Image" style="max-width: 100%; height: auto;">
+                </div>
+                {% endif %}
+            `;
+        }
+    </script>
+</body>
+</html>
