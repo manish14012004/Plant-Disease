@@ -9,7 +9,6 @@ ref = {
  0: 'anthracnose',
  1: 'bacterial',
  2: 'charcoal root',
- 
  } # Add all your classes here
 
 def corn_model_and_predict(img_path):
