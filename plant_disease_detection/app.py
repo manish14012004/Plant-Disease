@@ -3,6 +3,7 @@ from flask import Flask, request, render_template, redirect
 import os
 from werkzeug.utils import secure_filename
 from corn_leaf import corn_model_and_predict
+
 from tomato_leaf import tomato_model_and_predict
 from tomato_stem import tomato_stem_model_and_predict
 app = Flask(__name__)
@@ -72,6 +73,31 @@ def corn_predict():
         return render_template('corn_result.html', prediction=prediction, probability=probability, image_path=file_path)
     
     return redirect(request.url)
+
+#corn steam detection
+
+@app.route('/corn_stem_predict', methods=['POST'])
+def corn_stem_predict():
+    if 'file' not in request.files:
+        return redirect(request.url)
+    
+    file = request.files['file']
+    
+    if file.filename == '':
+        return redirect(request.url)
+    
+    if file:
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+        
+        prediction, probability = tomato_stem_model_and_predict(file_path)
+        
+        return render_template('corn_result.html', prediction=prediction, probability=probability, image_path=file_path)
+    
+    return redirect(request.url)
+ 
+
 
 #tomato detection
 @app.route('/tomato_predict', methods=['POST'])
