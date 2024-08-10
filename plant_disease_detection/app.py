@@ -6,6 +6,9 @@ from corn_leaf import corn_model_and_predict
 
 from tomato_leaf import tomato_model_and_predict
 from tomato_stem import tomato_stem_model_and_predict
+
+from potato_stem import potato_stem_model_and_predict
+
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads/'
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
@@ -150,6 +153,31 @@ def tomato_stem_predict():
 
         return render_template('tomato_result.html', prediction=prediction, probability=probability, image_path=image_path)
     
+    return redirect(request.url)
+
+
+#potato_stem detection
+@app.route('/potato_stem_predict', methods=['POST'])
+def potato_stem_predict():
+    if 'file' not in request.files:
+        return redirect(request.url)
+    
+    file = request.files['file']
+
+    if file.filename == '':
+        return redirect(request.url)
+    
+    if file:
+        filename = secure_filename(file.filename)
+        file_path = app.config['UPLOAD_FOLDER'] + filename
+        file.save(file_path)
+
+        prediction, probability = potato_stem_model_and_predict(file_path)
+
+        image_path = 'uploads/' + filename
+
+        return render_template('tomato_result.html', prediction=prediction, probability=probability, image_path=image_path)
+                                #above html page to be changed
     return redirect(request.url)
 
 
