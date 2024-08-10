@@ -156,6 +156,29 @@ def tomato_stem_predict():
     
     return redirect(request.url)
 
+#potato detection
+@app.route('/potato_predict', methods=['POST'])
+def potato_predict():
+    if 'file' not in request.files:
+        return redirect(request.url)
+    
+    file = request.files['file']
+    
+    if file.filename == '':
+        return redirect(request.url)
+    
+    if file:
+        filename = secure_filename(file.filename)
+        file_path = app.config['UPLOAD_FOLDER'] + filename
+        file.save(file_path)
+        
+        prediction, probability = potato_model_and_predict(file_path)
+
+        image_path = 'uploads/' + filename
+        
+        return render_template('potato_result.html', prediction=prediction, probability=probability, image_path=image_path)
+    
+    return redirect(request.url)
 
 #potato_stem detection
 @app.route('/potato_stem_predict', methods=['POST'])
