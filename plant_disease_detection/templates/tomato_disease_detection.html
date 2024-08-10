@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Side-by-Side Containers</title>
+    <title>🌱Tomato Disease Detection</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Your existing styles */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -185,7 +186,8 @@
             <h1>${contentTitle}</h1>
             <p>Here you can upload an image to detect the disease in the ${type}.</p>
                 <form action="${actionUrl}" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file">
+                    <input type="file" name="file" onchange="previewImage(event)">
+                    <img id="preview" style="display:none; max-width: 100%; height: auto; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
                     <button type="submit">Upload</button>
                 </form>
                 {% if prediction %}
@@ -195,6 +197,12 @@
                 </div>
                 {% endif %}
             `;
+        }
+
+        function previewImage(event) {
+            const preview = document.getElementById('preview');
+            preview.src = URL.createObjectURL(event.target.files[0]);
+            preview.style.display = 'block';
         }
     </script>
 </body>
