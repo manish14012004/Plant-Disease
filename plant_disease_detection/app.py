@@ -3,7 +3,8 @@ from flask import send_from_directory
 import os
 from werkzeug.utils import secure_filename
 from corn_leaf import corn_model_and_predict
-
+from corn_stem import corn_stem_model_and_predict
+from potato_stem import potato_stem_model_and_predict
 from tomato_leaf import tomato_model_and_predict
 from tomato_stem import tomato_stem_model_and_predict
 
@@ -95,7 +96,7 @@ def corn_stem_predict():
         file_path = app.config['UPLOAD_FOLDER'] + filename
         file.save(file_path)
         
-        prediction, probability = tomato_stem_model_and_predict(file_path)
+        prediction, probability = corn_stem_model_and_predict(file_path)
 
         image_path = 'uploads/' + filename
         
@@ -176,9 +177,10 @@ def potato_stem_predict():
 
         image_path = 'uploads/' + filename
 
-        return render_template('tomato_result.html', prediction=prediction, probability=probability, image_path=image_path)
+        return render_template('potato_result.html', prediction=prediction, probability=probability, image_path=image_path)
                                 #above html page to be changed
     return redirect(request.url)
+
 
 
 if __name__ == '__main__':

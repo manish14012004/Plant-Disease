@@ -3,7 +3,7 @@ from keras.preprocessing.image import load_img, img_to_array
 from keras.models import load_model
 from keras.applications.vgg19 import preprocess_input
 
-corn_leaf = load_model('corn_stem.h5')
+corn_stem = load_model('corn_stem.h5')
 
 ref = {
  0: 'anthracnose', 
@@ -12,7 +12,7 @@ ref = {
 
  } # Add all your classes here
 
-def corn_model_and_predict(img_path):
+def corn_stem_model_and_predict(img_path):
     img = load_img(img_path, target_size=(256, 256))
     img_array = img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)

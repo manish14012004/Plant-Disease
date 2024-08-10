@@ -181,7 +181,7 @@
                 contentTitle = 'STEM / ROOT DISEASE DETECTION';
             }
 
-            let actionUrl = type === 'leaf' ? '{{ url_for('corn_predict') }}' : '{{ url_for('corn_predict') }}';
+            let actionUrl = type === 'leaf' ? '{{ url_for('corn_predict') }}' : '{{ url_for('corn_stem_predict') }}';
 
             rightContainer.innerHTML = `
             <h1>${contentTitle}</h1>
