@@ -6,10 +6,10 @@ from keras.applications.vgg19 import preprocess_input
 corn_leaf = load_model('corn_leaf.h5')
 
 ref = {
- 0: 'Corn_(maize)_Cercospora_leaf_spot Gray_leaf_spot',
- 1: 'Corn_(maize)Common_rust',
- 2: 'Corn_(maize)_Northern_Leaf_Blight',
- 3: 'Corn_(maize)_healthy',
+ 0: 'Corn Cercospora Leaf Spot',
+ 1: 'Corn Common Rust',
+ 2: 'Corn Northern Leaf Blight',
+ 3: 'Corn Healthy',
  } # Add all your classes here
 
 def corn_model_and_predict(img_path):

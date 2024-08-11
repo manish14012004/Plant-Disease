@@ -6,9 +6,9 @@ from keras.applications.vgg19 import preprocess_input
 potato_stem = load_model('potato_stem.keras')
 
 ref = {
- 0: 'potato_sclerotinia_timber_rot',
- 1: 'potato_phytophthora infestans',
- 2: 'potato_rhizoctonia',
+ 0: 'Potato Phytophthora Infestans',
+ 1: 'Potato Rhizoctonia',
+ 2: 'Potato Sclerotinia Timberrot',
  } # Add all your classes here
 
 def potato_stem_model_and_predict(img_path):

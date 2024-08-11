@@ -6,9 +6,9 @@ from keras.applications.vgg19 import preprocess_input
 corn_stem = load_model('corn_stem.h5')
 
 ref = {
- 0: 'anthracnose', 
- 1: 'bacterial', 
- 2: 'charcoal root',
+ 0: 'Corn Anthracnose', 
+ 1: 'Corn Bacterial', 
+ 2: 'Corn Charcoal Root',
 
  } # Add all your classes here
 

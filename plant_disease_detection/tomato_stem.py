@@ -6,11 +6,11 @@ from keras.applications.vgg19 import preprocess_input
 tomato_stem = load_model('tomato_stem.h5')
 
 ref = {
- 0: 'Tomato_Alternaria_Canker',
- 1: 'Tomato_Early_Blight',
- 2: 'Tomato_Late_Blight',
- 3: 'Tomato_Southern_Blight',
- 4: 'Tomato_Timber_Rot',
+ 0: 'Tomato Alternaria Canker',
+ 1: 'Tomato Early Blight',
+ 2: 'Tomato Late Blight',
+ 3: 'Tomato Southern Blight',
+ 4: 'Tomato Timber Rot',
  } # Add all your classes here
 
 def tomato_stem_model_and_predict(img_path):

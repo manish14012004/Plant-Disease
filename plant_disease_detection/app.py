@@ -201,7 +201,7 @@ def potato_stem_predict():
         image_path = 'uploads/' + filename
 
         return render_template('potato_result.html', prediction=prediction, probability=probability, image_path=image_path)
-                                #above html page to be changed
+                                
     return redirect(request.url)
 
 
