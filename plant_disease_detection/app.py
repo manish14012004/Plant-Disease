@@ -7,6 +7,7 @@ from corn_stem import corn_stem_model_and_predict
 from potato_stem import potato_stem_model_and_predict
 from tomato_leaf import tomato_model_and_predict
 from tomato_stem import tomato_stem_model_and_predict
+from pepper_stem import pepper_stem_model_and_predict
 
 from potato_stem import potato_stem_model_and_predict
 
@@ -201,9 +202,56 @@ def potato_stem_predict():
         image_path = 'uploads/' + filename
 
         return render_template('potato_result.html', prediction=prediction, probability=probability, image_path=image_path)
-                                #above html page to be changed
+                                
     return redirect(request.url)
 
+#pepper_leaf detection
+@app.route('/pepper_predict', methods=['POST'])
+def pepper_predict():
+    if 'file' not in request.files:
+        return redirect(request.url)
+    
+    file = request.files['file']
+    
+    if file.filename == '':
+        return redirect(request.url)
+    
+    if file:
+        filename = secure_filename(file.filename)
+        file_path = app.config['UPLOAD_FOLDER'] + filename
+        file.save(file_path)
+        
+        prediction, probability = pepper_model_and_predict(file_path)
+
+        image_path = 'uploads/' + filename
+        
+        return render_template('pepper_result.html', prediction=prediction, probability=probability, image_path=image_path)
+    
+    return redirect(request.url)
+
+#pepper_stem detection
+@app.route('/pepper_stem_predict', methods=['POST'])
+def pepper_stem_predict():
+    if 'file' not in request.files:
+        return redirect(request.url)
+    
+    file = request.files['file']
+
+    if file.filename == '':
+        return redirect(request.url)
+    
+    if file:
+        filename = secure_filename(file.filename)
+        file_path = app.config['UPLOAD_FOLDER'] + filename
+        file.save(file_path)
+
+        prediction, probability = pepper_stem_model_and_predict(file_path)
+
+        image_path = 'uploads/' + filename
+
+        return render_template('pepper_result.html', prediction=prediction, probability=probability, image_path=image_path)
+                                
+    return redirect(request.url)
 
 
 if __name__ == '__main__':
