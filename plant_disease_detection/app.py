@@ -1,6 +1,10 @@
 from flask import Flask, request, render_template, redirect
-from flask import send_from_directory
+from flask import Flask, render_template, make_response
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from io import BytesIO
 import os
+
 from werkzeug.utils import secure_filename
 from corn_leaf import corn_model_and_predict
 from corn_stem import corn_stem_model_and_predict
@@ -8,8 +12,9 @@ from potato_stem import potato_stem_model_and_predict
 from tomato_leaf import tomato_model_and_predict
 from tomato_stem import tomato_stem_model_and_predict
 from pepper_stem import pepper_stem_model_and_predict
+from banana_leaf import banana_model_and_predict
+from fertilizer_model import predict_fertilizer
 
-from potato_stem import potato_stem_model_and_predict
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads/'
@@ -49,6 +54,10 @@ def corn_disease_detection():
 @app.route('/pepper_disease_detection')
 def pepper_disease_detection():
     return render_template('pepper_disease_detection.html')
+
+@app.route('/banana_disease_detection')
+def banana_disease_detection():
+    return render_template('banana_disease_detection.html')
 
 @app.route('/learn_more')
 def learn_more_page():
@@ -124,13 +133,14 @@ def tomato_predict():
         file_path = app.config['UPLOAD_FOLDER'] + filename
         file.save(file_path)
         
-        prediction, probability = tomato_model_and_predict(file_path)
+        prediction, spread_percentage, category = tomato_model_and_predict(file_path)
 
         image_path = 'uploads/' + filename
         
-        return render_template('tomato_result.html', prediction=prediction, probability=probability, image_path=image_path)
+        return render_template('tomato_result.html', prediction=prediction, spread_percentage=spread_percentage, category=category, image_path=image_path)
     
     return redirect(request.url)
+
 
 #tomato stem detection
 
@@ -252,6 +262,52 @@ def pepper_stem_predict():
         return render_template('pepper_result.html', prediction=prediction, probability=probability, image_path=image_path)
                                 
     return redirect(request.url)
+
+#banana leaf detection
+@app.route('/banana_predict', methods=['POST'])
+def banana_predict():
+    if 'file' not in request.files:
+        return redirect(request.url)
+    
+    file = request.files['file']
+    
+    if file.filename == '':
+        return redirect(request.url)
+    
+    if file:
+        filename = secure_filename(file.filename)
+        file_path = app.config['UPLOAD_FOLDER'] + filename
+        file.save(file_path)
+        
+        prediction, spread_percentage, category = banana_model_and_predict(file_path)
+
+        image_path = 'uploads/' + filename
+        
+        return render_template('banana_result.html', prediction=prediction, spread_percentage=spread_percentage, category=category, image_path=image_path)
+    
+    return redirect(request.url)
+
+#New route for fertilizer prediction
+@app.route('/fertilizer_predict', methods=['POST'])
+def fertilizer_predict():
+    # Retrieve the disease name and spread percentage from the form
+    prediction = request.form['disease_name']
+    spread_percentage = request.form['spread_percentage']
+  
+    # Use the model to predict fertilizer details
+    fertilizer_name, common_name, rei, phi, cause_description = predict_fertilizer(prediction, spread_percentage)
+
+    # Render the fertilizer_ml.html template with the prediction results
+    return render_template('fertilizer_ml.html', 
+                           fertilizer_name=fertilizer_name,
+                           common_name=common_name,
+                           rei=rei,
+                           phi=phi,
+                           cause_description=cause_description,
+                           prediction=prediction, 
+                           spread_percentage=spread_percentage,
+                           )
+
 
 
 if __name__ == '__main__':

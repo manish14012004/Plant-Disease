@@ -5,172 +5,472 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌱Tomato Disease Detection</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        /* Your existing styles */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+       
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-        body {
-            background-image: url('{{ url_for('static', filename='images/tomatoes2-e.jpg') }}');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
-            margin: 0;
-            display: flex;
+body {
+    background-color: #e9f7ef;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #16a085; /* Transparent background */
+    padding: 20px 40px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); /* Glass effect */
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    font-size: 2em;
+    color: white;
+    margin-right: 10px;
+}
+
+.site-title {
+    font-size: 2.5em;
+    font-family: 'Verdana', sans-serif;
+    color: white;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: normal;
+}
+
+/* Container Styles */
+.container {
+    display: flex;
+    width: 90%;
+    height: calc(100vh - 140px);
+    margin: 120px auto 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Left Container Styles */
+.left-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    margin: 10px;
+    box-sizing: border-box;
+    position: relative;
+    text-align: center;
+    border-radius: 15px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5); /* Transparent dark background */
+    animation: fadeIn 1s ease-in-out;
+}
+
+.left-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://media.istockphoto.com/id/171579643/photo/tomato-greenhouse.jpg?s=612x612&w=0&k=20&c=BLtIrrBprkZlIHNfSYIhkm3aebVUjqxsS-Yoqa1ss08=');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8; /* Increased opacity for darker overlay */
+    z-index: 0;
+}
+
+.left-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Darker transparent overlay */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.left-container h1, .left-container p, .left-container button {
+    position: relative;
+    z-index: 2;
+}
+
+
+.left-container h1 {
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-family: 'Circular Std', 'Arial', sans-serif;
+}
+
+.left-container p {
+    font-size: 20px;
+    line-height: 1.8;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    max-width: 90%;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: 'Circular Std', 'Arial', sans-serif;
+    text-align: left;
+}
+
+
+
+.left-container button {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 16px;
+    height: 50px;
+    width: 300px;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.left-container button:hover {
+    background-color: white;
+    color: #16a085;
+    border-color: #16a085;
+    transform: scale(1.05);
+}
+
+/* Right Container Styles */
+/* Right Container Styles */
+.right-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1); /* Transparent light background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-in-out;
+    position: relative; /* To ensure proper positioning of the info box */
+}
+/* Info Box Styles */
+.info-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8); /* Slightly opaque background */
+    border: 2px solid #16a085; /* Border color */
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.info-icon {
+    font-size: 3em;
+    color: #16a085;
+    margin-bottom: 10px;
+}
+
+.info-box p {
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
+
+.right-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+/* Right Container Text and Forms */
+.right-container h1 {
+    font-size: 2.5em;
+    color: #000;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-family: 'Circular Std', 'Arial', sans-serif;
+    position: relative;
+    z-index: 1;
+}
+
+.right-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.right-container input[type="file"] {
+    margin: 10px 0;
+    padding: 10px;
+    border: 2px solid #16a085;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.right-container input[type="file"]:hover {
+    border: 2px solid #16a085;
+}
+
+.result {
+    margin-top: 20px;
+}
+
+.result h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+.result img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* General Button Styles */
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    height: 50px;
+    width: 300px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Right Container Button Overrides */
+.right-container button {
+    border: 2px solid #16a085;
+    color: #16a085;
+}
+
+.right-container button:hover {
+    background-color: #16a085;
+    color: white;
+    border-color: #16a085;
+}
+/* Custom File Upload Button Styles */
+.custom-file-upload {
+    background-color: transparent;
+    border: 2px solid #16a085;
+    color: #16a085;
+    font-size: 16px;
+    height: 50px;
+    width: 300px;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 1;
+}
+
+.custom-file-upload:hover {
+    background-color: #16a085;
+    color: white;
+    border-color: #16a085;
+}
+
+input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+    top: 0;
+    left: 0;
+}
+
+/* Custom Upload Button Styles */
+.custom-upload-button {
+    background-color: #16a085;
+    border: 2px solid #16a085;
+    color: white;
+    font-size: 16px;
+    height: 50px;
+    width: 300px;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 1;
+}
+
+.custom-upload-button:hover {
+    background-color: white;
+    color: #16a085;
+    border-color: #16a085;
+}
+
+/* Display Selected File Name */
+.file-name {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
-            font-family: 'Arial', sans-serif;
         }
 
-        .container {
-            display: flex;
-            width: 80%;
-            height: 90%;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .left-container, .right-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 10px;
-        }
-
-        .left-container {
-            background: rgba(246, 239, 239, 0.8);
-            text-align: center;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .left-container h1 {
-            font-size: 26px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .left-container p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #444;
-            background: rgba(255, 255, 255, 0.8);
+        .modal-content {
+            background-color: #fefefe;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            max-width: 90%;
-            margin-bottom: 30px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .left-container p:hover {
-            background-color: rgba(255, 255, 255, 0.9);
-            transform: scale(1.02);
-        }
-
-        .right-container {
-            background: rgba(241, 235, 235, 0.8);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease-in-out;
-            border-radius: 15px;
-            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 500px;
             text-align: center;
+            position: relative;
         }
 
-        .right-container h1 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        .close {
+            color: #aaa;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        .right-container form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        .right-container input[type="file"] {
-            margin: 10px 0;
-            padding: 10px;
-            border: 2px solid #4CAF50;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
+        video {
+            width: 100%;
+            border-radius: 10px;
         }
 
-        .right-container input[type="file"]:hover {
-            border-color: #45a049;
-        }
-
-        .result {
+        #capture-button {
             margin-top: 20px;
         }
 
-        .result h2 {
-            font-size: 20px;
-            color: #333;
-        }
-
-        .result img {
-            max-width: 100%;
-            height: auto;
+        /* Fixed Size for Previewed Image */
+        #preview {
+            display: none;
+            width: 300px;  /* Fixed width */
+            height: 300px;  /* Fixed height */
+            object-fit: cover;
+            margin-top: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            height: 50px;
-            width: 300px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #45a049;
-            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-    <header>
-        <!-- Optionally add header content here -->
+    <header class="header">
+        <div class="header-content">
+            <i class="fas fa-seedling icon"></i>
+            <h1 class="site-title">AgroNourish</h1>
+        </div>
     </header>
     <div class="container">
         <div class="left-container">
             <h1>TOMATO DISEASES</h1>
-            <p>Tomato is the most popular crop in the world and in every kitchen, it is found in different forms irrespective of the cuisine. After potato and sweet potato, it is the crop which is cultivated worldwide. India ranked 2 in the production of tomato. However, the quality and quantity of tomato crop goes down due to the various kinds of diseases. So, to detect the disease a deep learning-based approach is discussed in the article. For the disease detection and classification, a Convolution Neural Network based approach is applied.</p>
+            <p>Tomato plants are vulnerable to various diseases that can significantly impact yield and quality. Our cutting-edge disease detection tool analyzes leaf images to identify common tomato ailments, including bacterial wilt, early blight, and late blight. By leveraging advanced image analysis and machine learning algorithms, our system accurately detects signs of disease, providing valuable insights and recommendations for effective treatment. This early detection helps farmers take timely action, ensuring healthier plants and maximizing crop productivity.</p>
             <button onclick="showContent('leaf')">L E A F</button>
             <button onclick="showContent('stem')">S T E M / R O O T</button>
         </div>
         <div class="right-container" id="right-container">
-            <img src="static/images/image5.png" alt="A beautiful landscape" width="150" height="150">
+            <div class="info-box">
+                <i class="fas fa-exclamation-triangle info-icon"></i>
+                <p>Please upload only images of the selected crop and its specific parts.
+                Other types of images may not be processed correctly.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Webcam Modal -->
+    <div id="webcamModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <video id="webcam" autoplay></video>
+            <button id="capture-button" class="custom-upload-button" onclick="captureImage()">Capture Image</button>
         </div>
     </div>
 
     <script>
+        let videoStream;
+
         function showContent(type) {
             const rightContainer = document.getElementById('right-container');
-            rightContainer.style.animation = 'none'; // Reset animation
-            void rightContainer.offsetWidth; // Trigger reflow
+            rightContainer.style.animation = 'none';
+            void rightContainer.offsetWidth;
             rightContainer.style.animation = 'fadeIn 1s ease-in-out';
 
             let contentTitle = '';
@@ -183,12 +483,17 @@
             let actionUrl = type === 'leaf' ? '{{ url_for('tomato_predict') }}' : '{{ url_for('tomato_stem_predict') }}';
 
             rightContainer.innerHTML = `
-            <h1>${contentTitle}</h1>
-            <p>Here you can upload an image to detect the disease in the ${type}.</p>
-                <form action="${actionUrl}" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file" onchange="previewImage(event)">
-                    <img id="preview" style="display:none; max-width: 100%; height: auto; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-                    <button type="submit">Upload</button>
+                <h1>${contentTitle}</h1>
+                <p>Here you can upload an image to detect the disease in the ${type}.</p>
+                <form id="detectionForm" action="${actionUrl}" method="post" enctype="multipart/form-data">
+                    <label class="custom-file-upload">
+                        <input type="file" name="file" onchange="previewImage(event); updateFileName(event)">
+                        CHOOSE FILE
+                    </label>
+                    <div class="file-name" id="file-name">----OR----</div>
+                    <img id="preview" style="display:none;">
+                    <button type="button" class="custom-file-upload" onclick="openModal()">[◉°]</button>
+                    <button type="submit">UPLOAD</button>
                 </form>
                 {% if prediction %}
                 <div class="result">
@@ -203,6 +508,65 @@
             const preview = document.getElementById('preview');
             preview.src = URL.createObjectURL(event.target.files[0]);
             preview.style.display = 'block';
+        }
+
+        function updateFileName(event) {
+            const fileNameElement = document.getElementById('file-name');
+            const fileInput = event.target;
+            const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file chosen';
+            fileNameElement.textContent = fileName;
+        }
+
+        function openModal() {
+            const modal = document.getElementById('webcamModal');
+            modal.style.display = 'flex';
+            startWebcam();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('webcamModal');
+            modal.style.display = 'none';
+            stopWebcam();
+        }
+
+        function startWebcam() {
+            const video = document.getElementById('webcam');
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                    videoStream = stream;
+                })
+                .catch(err => console.error("Error accessing webcam: ", err));
+        }
+
+        function stopWebcam() {
+            videoStream.getTracks().forEach(track => track.stop());
+        }
+
+        function captureImage() {
+            const video = document.getElementById('webcam');
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Convert the canvas to a Blob
+            canvas.toBlob(function (blob) {
+                const file = new File([blob], "captured_image.png", { type: "image/png" });
+
+                // Create a DataTransfer object to simulate file selection
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+
+                // Set the file input's files to the DataTransfer's files
+                const fileInput = document.querySelector('input[type="file"]');
+                fileInput.files = dataTransfer.files;
+
+                // Preview the captured image
+                previewImage({ target: fileInput });
+            });
+
+            closeModal();
         }
     </script>
 </body>

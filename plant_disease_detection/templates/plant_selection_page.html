@@ -1,85 +1,255 @@
 {% extends "base.html" %}
 {% block content %}
-<header class="my-4">
-    <h1 style="text-align: center; font-size: 3em; font-family: 'Arial', sans-serif; color: #255627; height: 150px; line-height: 150px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); font-weight: bold;">S E L E C T P L A N T</h1>
-
-    <!--these is the code for the boxes of detection-->
-<div class="mt-4" style="text-align: center;">
-    <div class="button-box" style="display: inline-block; margin: 30px;">
-      <a href="{{ url_for('tomato_disease_detection') }}" class="btn btn-primary image-button" style="background-image: url('https://th.bing.com/th/id/OIP.wEUDafUut5ckEZ_ILLHm_wHaE8?rs=1&pid=ImgDetMain'); background-size: cover; background-position: center; width: 200px; height: 200px; display: block; position: relative; overflow: hidden;padding: 20px;">
-        <span class="button-text">TOMATO DISEASE</span>
-      </a>
-    </div>
-    
-  
-    <div class="button-box" style="display: inline-block; margin: 30px;">
-      <a href="{{ url_for('potato_disease_detection') }}" class="btn btn-secondary image-button" style="background-image: url('https://th.bing.com/th/id/R.7dcfab839a8887625166f23cd4d62de6?rik=FBi%2fmS2gT49C0w&riu=http%3a%2f%2fwww.texilaconnect.com%2fwp-content%2fuploads%2f2014%2f06%2fpotato-plant.jpg&ehk=BhOVUCIsckIvzgf4eHlLxbNULKMK9%2f%2flR%2f6utEraFEc%3d&risl=&pid=ImgRaw&r=0'); background-size: cover; background-position: center; width: 200px; height: 200px; display: block; position: relative; overflow: hidden;padding: 20px;">
-        <span class="button-text">POTATO DISEASE</span>
-        </a>
-        </div>
-  
-        <div class="button-box" style="display: inline-block; margin: 30px;">
-          <a href="{{ url_for('corn_disease_detection') }}" class="btn btn-primary image-button" style="background-image: url('https://plantura.garden/uk/wp-content/uploads/sites/2/2022/04/corn-cob-1024x683.jpg?x96810'); background-size: cover; background-position: center; width: 200px; height: 200px; display: block; position: relative; overflow: hidden;padding: 20px;">
-            <span class="button-text">CORN DISEASE</span>
-          </a>
-          </div>
-        
-        <div class="button-box" style="display: inline-block; margin: 30px;">
-          <a href="{{ url_for('pepper_disease_detection') }}" class="btn btn-primary image-button" style="background-image: url('https://hortzone.com/wp-content/uploads/2021/04/15-Types-of-Pepper-Plants-to-Grow-in-Your-Garden.jpg'); background-size: cover; background-position: center; width: 200px; height: 200px; display: block; position: relative; overflow: hidden;padding: 20px;">
-            <span class="button-text">PEPPER DISEASE</span>
-          </a>
-        </div>    
-      
-  
-  
-  <style>
-     body {
-      background-color: #ffffff; /* Light grey background color */
-    }
-    .zoomable {
-      transition: transform 0.5s ease-in-out;
-    }
-  
-    .zoomable:hover {
-      transform: scale(1.1);
-    }
-  
-    .button-box {
-      position: relative;
-      overflow: hidden;
-      transition: background-color 0.3es;
-    }
-  
-    .button-box:hover {
-      background-color: black;
-    }
-  
-    .image-button {
-      text-decoration: none;
-      color: transparent; /* Hide text */
-      transition: transform 0.3s ease;
-      display: block; /* Ensure the button covers the entire box */
-    }
-  
-    .image-button:hover {
-      transform: scale(1.1);
-    }
-  
-    .button-text {
-      position: absolute;
-      bottom: 10px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-weight: bold;
-      color: #fff;
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-      transition: background-color 0.3s ease;
-    }
-  
-    .image-button:hover .button-text {
-      background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
-    }
-  </style>
+<header class="header">
+  <div class="header-content">
+    <!-- Add an icon before the text -->
+    <i class="fas fa-seedling icon"></i>
+    <h1 class="site-title">AgroNourish</h1>
+  </div>
 </header>
+
+<!-- Adjust the top margin of the content to make room for the fixed header -->
+<div class="content" style="margin-top: 120px; text-align: center;">
+
+  <!-- Section 1 -->
+  <div class="section" style="background-image: url('https://th.bing.com/th/id/OIP.wEUDafUut5ckEZ_ILLHm_wHaE8?rs=1&pid=ImgDetMain');">
+    <div class="image-content">
+      <img src="https://th.bing.com/th/id/OIP.wEUDafUut5ckEZ_ILLHm_wHaE8?rs=1&pid=ImgDetMain" alt="Tomato Disease">
+    </div>
+    <div class="text-content">
+      <h2 class="section-heading">Tomato Disease Detection</h2>
+      <p class="section-paragraph">Learn how to detect and manage diseases affecting tomato plants using our advanced diagnostic tools.</p>
+      <a href="{{ url_for('tomato_disease_detection') }}" class="btn btn-transparent">Start Diagnosis</a>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section" style="background-image: url('https://th.bing.com/th/id/R.7dcfab839a8887625166f23cd4d62de6?rik=FBi%2fmS2gT49C0w&riu=http%3a%2f%2fwww.texilaconnect.com%2fwp-content%2fuploads%2f2014%2f06%2fpotato-plant.jpg&ehk=BhOVUCIsckIvzgf4eHlLxbNULKMK9%2f%2flR%2f6utEraFEc%3d&risl=&pid=ImgRaw&r=0');">
+    <div class="text-content">
+      <h2 class="section-heading">Potato Disease Detection</h2>
+      <p class="section-paragraph">Discover methods for identifying and treating diseases in potato crops to ensure a healthy harvest.</p>
+      <a href="{{ url_for('potato_disease_detection') }}" class="btn btn-transparent">Start Diagnosis</a>
+    </div>
+    <div class="image-content">
+      <img src="https://th.bing.com/th/id/R.7dcfab839a8887625166f23cd4d62de6?rik=FBi%2fmS2gT49C0w&riu=http%3a%2f%2fwww.texilaconnect.com%2fwp-content%2fuploads%2f2014%2f06%2fpotato-plant.jpg&ehk=BhOVUCIsckIvzgf4eHlLxbNULKMK9%2f%2flR%2f6utEraFEc%3d&risl=&pid=ImgRaw&r=0" alt="Potato Disease">
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section" style="background-image: url('https://plantura.garden/uk/wp-content/uploads/sites/2/2022/04/corn-cob-1024x683.jpg?x96810');">
+    <div class="image-content">
+      <img src="https://plantura.garden/uk/wp-content/uploads/sites/2/2022/04/corn-cob-1024x683.jpg?x96810" alt="Corn Disease">
+    </div>
+    <div class="text-content">
+      <h2 class="section-heading">Corn Disease Detection</h2>
+      <p class="section-paragraph">Identify and treat diseases affecting corn crops with our specialized diagnostic tools and resources.</p>
+      <a href="{{ url_for('corn_disease_detection') }}" class="btn btn-transparent">Start Diagnosis</a>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section" style="background-image: url('https://hortzone.com/wp-content/uploads/2021/04/15-Types-of-Pepper-Plants-to-Grow-in-Your-Garden.jpg');">
+    <div class="text-content">
+      <h2 class="section-heading">Pepper Disease Detection</h2>
+      <p class="section-paragraph">Find out how to detect and manage diseases in pepper plants with our effective diagnostic tools.</p>
+      <a href="{{ url_for('pepper_disease_detection') }}" class="btn btn-transparent">Start Diagnosis</a>
+    </div>
+    <div class="image-content">
+      <img src="https://hortzone.com/wp-content/uploads/2021/04/15-Types-of-Pepper-Plants-to-Grow-in-Your-Garden.jpg" alt="Pepper Disease">
+    </div>
+  </div>
+
+   <!-- Section 5 -->
+   <div class="section" style="background-image: url('https://askthegreengenie.com/wp-content/uploads/2014/10/bananas1.jpg');">
+    <div class="text-content">
+      <h2 class="section-heading">Banana Disease Detection</h2>
+      <p class="section-paragraph">Find out how to detect and manage diseases in banana plants with our effective diagnostic tools.</p>
+      <a href="{{ url_for('banana_disease_detection') }}" class="btn btn-transparent">Start Diagnosis</a>
+    </div>
+    <div class="image-content">
+      <img src="https://askthegreengenie.com/wp-content/uploads/2014/10/bananas1.jpg" alt="Pepper Disease">
+    </div>
+  </div>
+
+</div>
+
+<style>
+  body {
+    background-color: #e9f7ef;
+  }
+
+  .section {
+    position: relative;
+    padding: 40px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    margin-bottom: 40px;
+    height: 400px; /* Increased height for each section */
+  }
+
+  .section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Black overlay with 20% opacity */
+    z-index: 1;
+  }
+
+  .text-content, .image-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .text-content {
+    max-width: 50%; /* Set a maximum width for text content */
+    padding: 20px;
+  }
+
+  .image-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .image-content img {
+    width: 100%; /* Ensure the image fills the container width */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 100%; /* Ensure the image does not exceed container height */
+    object-fit: cover; /* Cover the container while maintaining aspect ratio */
+    border-radius: 10px;
+    border: 2px solid #fff;
+  }
+
+  .section:nth-of-type(odd) .image-content {
+    order: 1; /* Move image to the left for odd sections */
+  }
+
+  .section:nth-of-type(odd) .text-content {
+    order: 0; /* Move text to the right for odd sections */
+  }
+
+  .section:nth-of-type(even) .image-content {
+    order: 0; /* Move image to the right for even sections */
+  }
+
+  .section:nth-of-type(even) .text-content {
+    order: 1; /* Move text to the left for even sections */
+  }
+
+  .section-heading {
+    font-size: 2em;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+  }
+
+  .section-paragraph {
+    font-size: 1.2em;
+    color: #ffffff;
+    line-height: 1.6;
+    font-family: 'Circular Std', sans-serif; /* Circular font */
+  }
+
+  .btn-transparent {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)); /* Gradient background */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-transparent::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.1); /* Light highlight effect */
+    transition: all 0.4s ease;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .btn-transparent:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .btn-transparent:hover {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)); /* Darker gradient on hover */
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Enhanced shadow on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    border-color: rgba(255, 255, 255, 0.7); /* Lighter border on hover */
+  }
+
+  .btn-transparent:active {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)); /* Slightly darker on click */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Reduced shadow on click */
+    transform: translateY(0); /* Reset lift effect */
+    border-color: rgba(255, 255, 255, 0.5); /* Reset border color on click */
+  }
+
+  .btn-transparent span {
+    position: relative;
+    z-index: 1; /* Ensure text is above the highlight effect */
+  }
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #16a085;
+    padding: 20px 40px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .icon {
+    font-size: 2em;
+    color: white;
+    margin-right: 10px;
+  }
+
+  .site-title {
+    font-size: 2.5em;
+    font-family: 'Verdana', sans-serif;
+    color: white;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: normal;
+  }
+</style>
+
 {% endblock %}
+

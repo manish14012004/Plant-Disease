@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Fertilizer Recommendation</title>
+    <style>
+        /* Body Styles */
+        body {
+            background-image: url('https://factor.niehs.nih.gov/sites/niehs-factor/files/2022/2/papers/pesticide-exposure/img930749.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            font-family: 'Circular Std', sans-serif;
+            padding-top: 80px; /* Ensure content is not hidden behind the fixed header */
+            overflow: auto; /* Allow scrolling */
+            position: relative;
+            min-height: 100vh; /* Ensure full height */
+        }
+
+        /* Overlay to reduce background image opacity */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(22, 160, 133, 0.8);
+            padding: 20px 40px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            font-size: 2em;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .site-title {
+            font-size: 2.5em;
+            font-family: 'Verdana', sans-serif;
+            color: white;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: normal;
+        }
+
+        /* Container Styles */
+        .result-container {
+            background-color: rgba(241, 235, 235, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%; /* Adjust width for better visibility */
+            max-width: 1200px; /* Set maximum width */
+            margin: 0 auto; /* Center container */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            margin-top: 120px; /* Adjust top margin to account for the fixed header */
+        }
+
+        /* Heading Styles */
+        .result-container h1 {
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        /* Box Styles */
+.box-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.box {
+    flex: 1;
+    background-color: rgba(22, 160, 133, 0.6);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 0 10px;
+    font-size: 1.5em;
+    font-weight: normal; /* Make the text not bold */
+}
+
+/* Add padding/margin to separate the boxes */
+.fertilizer-box {
+    margin-bottom: 40px; /* Adjust this value as needed */
+}
+
+
+        /* Image Styles */
+        .result-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        /* Button Styles */
+        .result-container button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(22, 160, 133, 0.8);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .result-container button:hover {
+            background-color: rgba(22, 160, 133, 1);
+            transform: translateY(-3px);
+        }
+        /* Cause Description Styles */
+.cause-description-heading {
+    font-size: 3em;
+    font-family: 'Circular Std', sans-serif;
+    font-weight: bold;
+    margin-top: 40px; /* Adjust spacing above the heading */
+    margin-bottom: 20px; /* Adjust spacing below the heading */
+    text-align: center;
+}
+
+.cause-description-box {
+    background-color: rgba(22, 160, 133, 0.6); /* Adjust opacity */
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Circular Std', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 80%; /* Optional: Limit width for better readability */
+    margin: 0 auto; /* Center align the box */
+    font-size: 1em; /* Adjust font size to match other elements */
+}
+/* Adjust font size of paragraph inside the box */
+.cause-description-box p {
+    margin: 0; /* Remove default margin */
+    font-size: 1.5em; /* Increase font size */
+}
+/* Adjust font size and text transformation for paragraph inside the box */
+.box p,
+.cause-description-box p {
+    margin: 0; /* Remove default margin */
+    font-size: 1.2em; /* Increase font size */
+    text-transform: uppercase; /* Make text uppercase */
+    font-weight: normal; /* Make the text not bold */
+}
+
+        
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <i class="fas fa-seedling icon"></i>
+            <h1 class="site-title">AgroNourish</h1>
+        </div>
+    </header>
+
+    <div class="result-container">
+        <h1>D I S E A S E D&nbsp;&nbsp;&nbsp;&nbsp;D E T E C T E D</h1>
+        <div class="box-container">
+            <div class="box">
+                <h3>DISEASE:</h3>
+                <p>{{ prediction }}</p>
+            </div>
+            <div class="box">
+                <h3>SPREAD PERCENTAGE:</h3>
+                <p>{{ spread_percentage }} %</p>
+            </div>
+        </div>
+    
+        <h1>S O L U T I O N </h1>
+        <div class="box fertilizer-box">
+            <h3>FERTILIZER NAME:</h3>
+            <p>{{ fertilizer_name }}</p>
+        </div>
+    
+        <div class="box-container">
+            <div class="box">
+                <h3>COMMON NAME:</h3>
+                <p>{{ common_name }}</p>
+            </div>
+            <div class="box">
+                <h3>REI:</h3>
+                <p>{{ rei }}</p>
+            </div>
+            <div class="box">
+                <h3>PHI:</h3>
+                <p>{{ phi }}</p>
+            </div>
+        </div>
+    
+        <h1 class="cause-description-heading">W H A T&nbsp;&nbsp; C A U S E D &nbsp;&nbsp;I T &nbsp;&nbsp;?</h1>
+        <div class="cause-description-box">
+            <p>{{ cause_description }}</p>
+        </div>
+        
+    
+        <button onclick="goHome()">Home</button>
+    </div>
+    
+    
+
+    <script>
+        function goHome() {
+            window.location.href = '/';
+        }
+    </script>
+</body>
+
+</html>
