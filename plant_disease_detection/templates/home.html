@@ -1,302 +1,229 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="icon" type="image/jpg" href = "static/images/favicon.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="icon" type="image/jpg" href="static/images/favicon.jpg">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+        <title>AgroNourish</title>
+        <style>
+            /* Global Styles */
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: 'Raleway', sans-serif;
+                background-color: #e9f7ef;
+                color: #333;
+            }
 
-    <title>AgroNourish</title>
-    <style>
-        
-        /* Global Styles */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Raleway', sans-serif;
+            /* Header Styles */
+            .header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background: rgba(22, 160, 133, 0.8); /* Transparent background */
+                padding: 20px 40px;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(10px); /* Glass effect */
+            }
 
-            background-color: #e9f7ef;
-            color: #333;
-        }
-
-        /* Header Styles */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(22, 160, 133, 0.8); /* Transparent background */
-            padding: 20px 40px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px); /* Glass effect */
-        }
-        
-        .header-content {
-            display: flex;
-            align-items: center;
-        }
-        
-        .header-image {
-            width: 4em; /* Size of the image to match the icon */
-            height: 4em; /* Size of the image to match the icon */
-            margin-right: 10px;
-        }
-        
-        .site-title {
-            font-size: 2.5em;
-            font-family: 'Raleway', sans-serif;
-
-            color: white;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            font-weight: normal;
-        }
-
-        /* Navigation Styles */
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-            margin-left: 20px;
-            position: relative;
-            padding: 10px 15px;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.5);
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .nav-link:hover::before {
-            background: white;
-            transform: scaleX(1);
-        }
-
-        .nav-link:hover {
-            color: #d3d3d3;
-            transform: translateY(-3px);
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Divider Styles */
-        .divider {
-            height: 4px;
-            background-color: #e9f7ef;
-            width: 100%;
-        }
-
-        /* Banner Styles */
-        .banner {
-            display: flex;
-            width: 98.8vw;
-            height: 88vh;
-            position: relative;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .banner .image-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(0px);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .text-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .banner-heading {
-            font-size: 4.5rem;
-            font-weight: 700;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
-            margin: 0;
-        }
-
-        .banner-paragraph {
-            font-size: 1rem;
-            color: white;
-            line-height: 1.6;
-            margin-top: 20px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            letter-spacing: 0.5px;
-            word-wrap: break-word;
-        }
-
-        .btn-transparent {
-            display: inline-block;
-            padding: 12px 24px;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-decoration: none;
-            color: #fff;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)); /* Gradient background */
-            border: 2px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-transparent::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background: rgba(255, 255, 255, 0.1); /* Light highlight effect */
-            transition: all 0.4s ease;
-            transform: translate(-50%, -50%) scale(0);
-            border-radius: 50%;
-            z-index: 0;
-        }
-
-        .btn-transparent:hover::before {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .btn-transparent:hover {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)); /* Darker gradient on hover */
-            color: #fff;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Enhanced shadow on hover */
-            transform: translateY(-2px); /* Slight lift effect */
-            border-color: rgba(255, 255, 255, 0.7); /* Lighter border on hover */
-        }
-
-        .btn-transparent:active {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)); /* Slightly darker on click */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Reduced shadow on click */
-            transform: translateY(0); /* Reset lift effect */
-            border-color: rgba(255, 255, 255, 0.5); /* Reset border color on click */
-        }
-
-        .btn-transparent span {
-            position: relative;
-            z-index: 1; /* Ensure text is above the highlight effect */
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
             .header-content {
-                justify-content: center;
+                display: flex;
+                align-items: center;
             }
 
+            .header-image {
+                width: 4em;
+                height: 4em;
+                margin-right: 10px;
+            }
+
+            .site-title {
+                font-size: 2.5em;
+                font-family: 'Raleway', sans-serif;
+                color: white;
+                margin: 0;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Navigation Styles */
             .nav {
-                justify-content: center;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
             }
 
+            .nav-link {
+                color: white;
+                text-decoration: none;
+                font-size: 1.2em;
+                margin-left: 20px;
+                position: relative;
+                padding: 10px 15px;
+                font-weight: bold;
+                text-transform: uppercase;
+                transition: color 0.3s ease, transform 0.3s ease;
+            }
+
+            .nav-link:hover {
+                color: #d3d3d3;
+                transform: translateY(-3px);
+            }
+
+            /* Section Styles */
+            section {
+                padding: 60px 40px;
+                text-align: center;
+            }
+
+            /* Responsive Banner Styles */
             .banner {
-                flex-direction: column;
-                height: auto;
+                width: 100%;
+                height: 100vh;
+                position: relative;
+                background-size: cover;
+                background-position: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
+            /* Text Container */
             .text-container {
-                padding: 20px;
-                margin-bottom: 20px;
+                background: rgba(0, 0, 0, 0.6);
+                padding: 30px;
+                border-radius: 10px;
+                max-width: 600px;
                 text-align: center;
+                color: white;
+                z-index: 2;
             }
 
-            .image-container {
-                text-align: center;
+            .banner-heading {
+                font-size: 4rem;
+                font-weight: 700;
+                margin: 0;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             }
-        }
-    </style>
-</head>
 
-<body>
-    <header class="header">
-        <div class="header-content">
-            <!-- Replace icon with image -->
-            <img src="{{ url_for('static', filename='images/HEADER.png') }}" alt="Logo" class="header-image">
-            <h1 class="site-title">AgroNourish</h1>
-        </div>
-        <nav class="nav">
-            <!-- Navigation links can be added here -->
-        </nav>
-    </header>
+            .banner-paragraph {
+                font-size: 1.2rem;
+                line-height: 1.6;
+                margin-top: 20px;
+            }
 
-    <div style="height: 88px;" id="home"></div>
+            /* Button Styles */
+            .btn-transparent {
+                display: inline-block;
+                padding: 12px 24px;
+                font-size: 1.2em;
+                font-weight: bold;
+                text-decoration: none;
+                color: #fff;
+                background: rgba(255, 255, 255, 0.3);
+                border: 2px solid rgba(255, 255, 255, 0.5);
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+                transition: all 0.3s ease;
+                position: relative;
+            }
 
-    <!-- First Banner -->
-    <div class="banner" style="background-image: url('{{ url_for('static', filename='images/nourish.jpg') }}');">
-        <div class="text-container">
-            <h1 class="banner-heading">Nourish Your Crops with Precision</h1>
-            <p class="banner-paragraph">
-                Diagnose, Treat, and Enhance the Health of Your Crops with Advanced Technology and Expertise.
-            </p>
-            <a href="{{ url_for('learn_more_page') }}" class="btn-transparent">LEARN MORE →</a>
-            
-        </div>
-    </div>
+            .btn-transparent:hover {
+                background: rgba(255, 255, 255, 0.6);
+                color: #fff;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+            }
 
-    <!-- Divider -->
-    <div class="divider"></div>
+            /* Divider */
+            .divider {
+                height: 4px;
+                background-color: #e9f7ef;
+                width: 100%;
+            }
 
-    <!-- Second Banner -->
-    <div class="banner" style="background-image: url('{{ url_for('static', filename='images/detection.jpg') }}');">
-        <div class="text-container">
-            <h2 class="banner-heading">Plant Disease Detection</h2>
-            <p class="banner-paragraph">
-                Quickly identify and diagnose plant diseases to take timely action and protect your crops.
-            </p>
-            <a href="{{ url_for('plant_selection_page') }}" class="btn-transparent">EXPLORE →</a>
-        </div>
-    </div>
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                .header-content {
+                    justify-content: center;
+                }
 
-    <!-- Divider -->
-    <div class="divider"></div>
+                .nav {
+                    justify-content: center;
+                }
 
-    <!-- Third Banner -->
-    <div class="banner" style="background-image: url('{{ url_for('static', filename='images/fertrecomm.jpg') }}');">
-        <div class="text-container">
-            <h2 class="banner-heading">Fertilizer Recommendation</h2>
-            <p class="banner-paragraph">
-                Get personalized fertilizer recommendations based on disease detection and spread percentage to optimize crop health and yield.
-            </p>
-            <a href="{{ url_for('fertilizer') }}" class="btn-transparent">EXPLORE →</a>
-        </div>
-    </div>
+                .banner-heading {
+                    font-size: 2.5rem;
+                }
 
-    <!-- Divider -->
-    <div class="divider"></div>
-</body>
+                .banner-paragraph {
+                    font-size: 1rem;
+                }
+            }
+        </style>
+    </head>
 
-</html>
+    <body>
+        <header class="header">
+            <div class="header-content">
+                <img src="{{ url_for('static', filename='images/HEADER.png') }}" alt="Logo" class="header-image">
+                <h1 class="site-title">AgroNourish</h1>
+            </div>
+            <nav class="nav">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+        </header>
+
+        <!-- Home Section -->
+        <section id="home" class="banner" style="background-image: url('https://ausveg.com.au/app/uploads/2018/11/Eggplant.jpg');">
+            <div class="text-container">
+                <h1 class="banner-heading">Nourish Your Crops with Precision</h1>
+                <p class="banner-paragraph">
+                    Diagnose, Treat, and Enhance the Health of Your Crops with Advanced Technology and Expertise.
+                </p>
+                <a href="{{ url_for('learn_more_page') }}" class="btn-transparent"><span>LEARN MORE →</span></a>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Services Section -->
+        <section id="services" class="banner" style="background-image: url('https://spectator.org/wp-content/uploads/2020/02/shutterstock_579532726-scaled.jpg');">
+            <div class="text-container">
+                <h2 class="banner-heading">Plant Disease Detection</h2>
+                <p class="banner-paragraph">
+                    Quickly identify and diagnose plant diseases to take timely action and protect your crops.
+                </p>
+                <a href="{{ url_for('plant_selection_page') }}" class="btn-transparent"><span>EXPLORE →</span></a>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Contact Section -->
+        <section id="contact" class="banner" style="background-image: url('https://wallpaperaccess.com/full/7150980.jpg');">
+            <div class="text-container">
+                <h2 class="banner-heading">Fertilizer Recommendation</h2>
+                <p class="banner-paragraph">
+                    Get personalized fertilizer recommendations based on disease detection and spread percentage to optimize crop health and yield.
+                </p>
+                <a href="{{ url_for('fertilizer') }}" class="btn-transparent"><span>EXPLORE →</span></a>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+    </body>
+
+    </html>
