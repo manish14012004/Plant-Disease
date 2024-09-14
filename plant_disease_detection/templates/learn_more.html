@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="header">
+  <div class="header-content">
+      <!-- Replace icon with image -->
+      <img src="{{ url_for('static', filename='images/HEADER.png') }}" alt="Logo" class="header-image">
+      <h1 class="site-title">AgroNourish</h1>
+  </div>
+  <nav class="nav">
+      <!-- Navigation links can be added here -->
+  </nav>
+</header>
+
+<!-- Adjust the top margin of the content to make room for the fixed header -->
+<div class="content" style="margin-top: 120px; text-align: center;">
+
+  <!-- Section 1 -->
+  <div class="section" >
+    <div class="image-content">
+      <img src="{{ url_for('static', filename='images/STEP1.png') }}" alt="Pepper Disease">
+    </div>
+    <div class="text-content">
+      <h2 class="section-heading">Step 1: Select the Crop for Diagnosis</h2>
+      <p class="section-paragraph">To begin the diagnostic process, please choose the specific crop you wish to assess. This selection will allow us to tailor the diagnostic tools and recommendations to your chosen crop, ensuring accurate and relevant results. Ensure you select the correct crop type to receive precise and effective diagnostic information.</p>
+      
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="text-content">
+      <h2 class="section-heading">Potato Disease Detection</h2>
+      <p class="section-paragraph">Discover methods for identifying and treating diseases in potato crops to ensure a healthy harvest.</p>
+      
+    </div>
+    <div class="image-content">
+      <img src="{{ url_for('static', filename='images/potato.jpg') }}" alt="Pepper Disease">
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section" >
+    <div class="image-content">
+      <img src="{{ url_for('static', filename='images/corn.jpg') }}" alt="Pepper Disease">
+    </div>
+    <div class="text-content">
+      <h2 class="section-heading">Corn Disease Detection</h2>
+      <p class="section-paragraph">Identify and treat diseases affecting corn crops with our specialized diagnostic tools and resources.</p>
+      
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section" >
+    <div class="text-content">
+      <h2 class="section-heading">Pepper Disease Detection</h2>
+      <p class="section-paragraph">Find out how to detect and manage diseases in pepper plants with our effective diagnostic tools.</p>
+      
+    </div>
+    <div class="image-content">
+      <img src="{{ url_for('static', filename='images/pepper.jpg') }}" alt="Pepper Disease">
+    </div>
+  </div>
+
+   <!-- Section 5 -->
+   <div class="section" >
+ 
+    <div class="text-content">
+      <h2 class="section-heading">Banana Disease Detection</h2>
+      <p class="section-paragraph">Find out how to detect and manage diseases in banana plants with our effective diagnostic tools.</p>
+      
+    </div>
+    <div class="image-content">
+      <img src="{{ url_for('static', filename='images/banana.jpg') }}" alt="Pepper Disease">
+    </div>
+  </div>
+
+</div>
+
+<style>
+  body {
+    background-color: #e9f7ef;
+  }
+
+  .section {
+    position: relative;
+    padding: 40px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-size: cover;
+    background-position: center;
+    background-color: #e9f7ef;
+    overflow: hidden;
+    margin-bottom: 40px;
+    /* Remove fixed height */
+  }
+
+  .section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+   
+    z-index: 1;
+  }
+
+  .text-content, .image-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .text-content {
+    max-width: 50%; /* Set a maximum width for text content */
+    padding: 20px;
+  }
+
+  .image-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-content img {
+    width: 100%; /* Ensure the image fills the container width */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 100%; /* Ensure the image does not exceed container height */
+    object-fit: cover; /* Cover the container while maintaining aspect ratio */
+    border-radius: 10px;
+    border: 2px solid #fff;
+  }
+
+  .section:nth-of-type(odd) .image-content {
+    order: 1; /* Move image to the left for odd sections */
+  }
+
+  .section:nth-of-type(odd) .text-content {
+    order: 0; /* Move text to the right for odd sections */
+  }
+
+  .section:nth-of-type(even) .image-content {
+    order: 0; /* Move image to the right for even sections */
+  }
+
+  .section:nth-of-type(even) .text-content {
+    order: 1; /* Move text to the left for even sections */
+  }
+
+  .section-heading {
+    font-size: 2em;
+    font-family: 'Arial', sans-serif;
+    color: black;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+  }
+
+  .section-paragraph {
+    font-size: 1.2em;
+    color: black;
+    line-height: 1.6;
+    font-family: 'Circular Std', sans-serif; /* Circular font */
+  }
+
+  .btn-transparent {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)); /* Gradient background */
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-transparent::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.1); /* Light highlight effect */
+    transition: all 0.4s ease;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .btn-transparent:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .btn-transparent:hover {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)); /* Darker gradient on hover */
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Enhanced shadow on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    border-color: rgba(255, 255, 255, 0.7); /* Lighter border on hover */
+  }
+
+  .btn-transparent:active {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)); /* Slightly darker on click */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Reduced shadow on click */
+    transform: translateY(0); /* Reset lift effect */
+    border-color: rgba(255, 255, 255, 0.5); /* Reset border color on click */
+  }
+
+  .btn-transparent span {
+    position: relative;
+    z-index: 1; /* Ensure text is above the highlight effect */
+  }
+
+  /* Header Styles */
+  .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(22, 160, 133, 0.8); /* Transparent background */
+      padding: 20px 40px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px); /* Glass effect */
+  }
+  
+  .header-content {
+      display: flex;
+      align-items: center;
+  }
+  
+  .header-image {
+      width: 4em; /* Size of the image to match the icon */
+      height: 4em; /* Size of the image to match the icon */
+      margin-right: 10px;
+  }
+  
+  .site-title {
+      font-size: 2.5em;
+      font-family: 'Verdana', sans-serif;
+      color: white;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      font-weight: normal;
+  }
+
+
+        .nav {
+            display: flex;
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0 15px;
+            font-size: 1em;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            margin-top: 120px; /* Adjusted margin for the fixed header */
+        }
+
+</style>
+{% endblock %}

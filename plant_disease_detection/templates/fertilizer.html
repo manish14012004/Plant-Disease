@@ -1,20 +1,82 @@
-{% extends "base.html" %}
-{% block content %}
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Fertilizer and Pesticide Shops</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+      body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
   
-</style>
-<header class="my-4">
-  <div class="button-container">
-    <div class="button">
-      <img src="fertilizer-icon.png" alt="Fertilizer Calculator">
-      <span>Fertilizer calculator</span>
-      <i class="arrow">&#8594;</i>
-    </div>
-    <div class="button">
-      <img src="pests-diseases-icon.png" alt="Pests & Diseases">
-      <span>Pests & diseases</span>
-      <i class="arrow">&#8594;</i>
-    </div>
-  </div>
-</header>
-{% endblock %}
+  h1 {
+      color: #333;
+      margin: 20px 0;
+  }
+  
+  #map {
+      width: 80%;
+      height: 500px;
+      border: 1px solid #ccc;
+  }
+  </style>
+</head>
+<body>
+    <h1>Nearby Fertilizer and Pesticide Shops</h1>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Initialize the map and set its view to a default location
+        const map = L.map('map').setView([0, 0], 13);
+    
+        // Load and display tile layers from OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+    
+        // Use Geolocation API to get the user's current position
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+    
+                // Update map view to user's location
+                map.setView([lat, lon], 15);
+    
+                // Add a marker for the user's current location
+                L.marker([lat, lon]).addTo(map)
+                    .bindPopup("You are here")
+                    .openPopup();
+    
+                // Simulated nearby shops data (in a real app, this data should come from a database or an API)
+                const shops = [
+                    { name: "Fertilizer Shop A", lat: lat + 0.01, lon: lon + 0.01 },
+                    { name: "Pesticide Shop B", lat: lat - 0.01, lon: lon - 0.01 },
+                    { name: "Fertilizer Shop C", lat: lat + 0.02, lon: lon - 0.02 },
+                ];
+    
+                // Add markers for nearby shops
+                shops.forEach(shop => {
+                    L.marker([shop.lat, shop.lon]).addTo(map)
+                        .bindPopup(shop.name)
+                        .openPopup();
+                });
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    });
+    
+    </script>
+</body>
+</html>

@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌱Tomato Disease Detection</title>
+    <title>Tomato</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" type="image/jpg" href = "static/images/favicon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Global Styles */
+       
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -20,45 +23,46 @@ body {
     background-repeat: no-repeat;
     height: 100vh;
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Raleway', sans-serif;
+
 }
 
 /* Header Styles */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(22, 160, 133, 0.8); /* Transparent background */
-    padding: 20px 40px;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px); /* Glass effect */
-}
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(22, 160, 133, 0.8); /* Transparent background */
+            padding: 20px 40px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px); /* Glass effect */
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-image {
+            width: 4em; /* Size of the image to match the icon */
+            height: 4em; /* Size of the image to match the icon */
+            margin-right: 10px;
+        }
+        
+        .site-title {
+            font-size: 2.5em;
+            font-family: 'Raleway', sans-serif;
 
-.header-content {
-    display: flex;
-    align-items: center;
-}
-
-.icon {
-    font-size: 2em;
-    color: white;
-    margin-right: 10px;
-}
-
-.site-title {
-    font-size: 2.5em;
-    font-family: 'Verdana', sans-serif;
-    color: white;
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    font-weight: normal;
-}
-
+            color: white;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: normal;
+        }
 /* Container Styles */
 .container {
     display: flex;
@@ -95,7 +99,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://askthegreengenie.com/wp-content/uploads/2014/10/bananas1.jpg');
+    background-image: url("{{ url_for('static', filename='images/banana.jpg') }}");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -126,22 +130,23 @@ body {
     color: #fff;
     margin-bottom: 20px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    font-family: 'Circular Std', 'Arial', sans-serif;
+    font-family: 'Raleway', sans-serif;
+
 }
 
 .left-container p {
     font-size: 20px;
     line-height: 1.8;
     color: white;
-    background: rgba(255, 255, 255, 0); /* Transparent background */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     max-width: 90%;
     margin-bottom: 30px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    font-family: 'Circular Std', 'Arial', sans-serif;
-    text-align:left;
+    font-family: 'Raleway', sans-serif;
+
+    text-align: left;
 }
 
 
@@ -168,6 +173,7 @@ body {
     transform: scale(1.05);
 }
 
+/* Right Container Styles */
 /* Right Container Styles */
 .right-container {
     flex: 1;
@@ -227,7 +233,8 @@ body {
     color: #000;
     margin-bottom: 20px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    font-family: 'Circular Std', 'Arial', sans-serif;
+    font-family: 'Raleway', sans-serif;
+
     position: relative;
     z-index: 1;
 }
@@ -371,22 +378,82 @@ input[type="file"] {
     font-size: 16px;
     color: #333;
 }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
 
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 500px;
+            text-align: center;
+            position: relative;
+        }
 
+        .close {
+            color: #aaa;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        #capture-button {
+            margin-top: 20px;
+        }
+
+        /* Fixed Size for Previewed Image */
+        #preview {
+            display: none;
+            width: 300px;  /* Fixed width */
+            height: 300px;  /* Fixed height */
+            object-fit: cover;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
-            <!-- Add an icon before the text -->
-            <i class="fas fa-seedling icon"></i>
+            <!-- Replace icon with image -->
+            <img src="{{ url_for('static', filename='images/HEADER.png') }}" alt="Logo" class="header-image">
             <h1 class="site-title">AgroNourish</h1>
         </div>
+        <nav class="nav">
+            <!-- Navigation links can be added here -->
+        </nav>
     </header>
     <div class="container">
         <div class="left-container">
             <h1>BANANA DISEASES</h1>
-            <p>Banana is one of the most widely consumed fruits in the world and is a staple in many diets across various cultures. After rice, wheat, and maize, it is one of the most cultivated crops globally. India is one of the leading producers of bananas, ranking first in production worldwide. However, the yield and quality of banana crops are often compromised due to the prevalence of various diseases. To address this issue, a deep learning-based approach is discussed in this article. For the detection and classification of diseases, a Convolutional Neural Network (CNN) based method is applied.</p>
+            <p>Banana plants are susceptible to a variety of diseases that can greatly reduce yield and fruit quality. Our advanced disease detection tool analyzes banana leaf images to identify common diseases such as Black Sigatoka, Panama disease, and Banana Bunchy Top Virus (BBTV). Using cutting-edge image analysis and machine learning algorithms, our system precisely detects disease symptoms, offering crucial insights and tailored recommendations for effective treatment. This early detection enables farmers to take timely measures, promoting healthier plants and optimizing banana production.</p>
             <button onclick="showContent('leaf')">L E A F</button>
             <button onclick="showContent('stem')">S T E M / R O O T</button>
         </div>
@@ -399,11 +466,22 @@ input[type="file"] {
         </div>
     </div>
 
+    <!-- Webcam Modal -->
+    <div id="webcamModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <video id="webcam" autoplay></video>
+            <button id="capture-button" class="custom-upload-button" onclick="captureImage()">Capture Image</button>
+        </div>
+    </div>
+
     <script>
+        let videoStream;
+
         function showContent(type) {
             const rightContainer = document.getElementById('right-container');
-            rightContainer.style.animation = 'none'; // Reset animation
-            void rightContainer.offsetWidth; // Trigger reflow
+            rightContainer.style.animation = 'none';
+            void rightContainer.offsetWidth;
             rightContainer.style.animation = 'fadeIn 1s ease-in-out';
 
             let contentTitle = '';
@@ -416,18 +494,18 @@ input[type="file"] {
             let actionUrl = type === 'leaf' ? '{{ url_for('banana_predict') }}' : '{{ url_for('tomato_stem_predict') }}';
 
             rightContainer.innerHTML = `
-            <h1>${contentTitle}</h1>
-            <p>Here you can upload an image to detect the disease in the ${type}.</p>
-                <form action="${actionUrl}" method="post" enctype="multipart/form-data">
-    <label class="custom-file-upload">
-        <input type="file" name="file" onchange="previewImage(event); updateFileName(event)">
-        CHOOSE FILE
-    </label>
-    <div class="file-name" id="file-name">No file chosen</div>
-    <img id="preview" style="display:none; max-width: 100%; height: auto; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-    <button type="submit">UPLOAD</button>
-</form>
-
+                <h1>${contentTitle}</h1>
+                <p>Here you can upload an image to detect the disease in the ${type}.</p>
+                <form id="detectionForm" action="${actionUrl}" method="post" enctype="multipart/form-data">
+                    <label class="custom-file-upload">
+                        <input type="file" name="file" onchange="previewImage(event); updateFileName(event)">
+                        CHOOSE FILE
+                    </label>
+                    <div class="file-name" id="file-name">----OR----</div>
+                    <img id="preview" style="display:none;">
+                    <button type="button" class="custom-file-upload" onclick="openModal()">[◉°]</button>
+                    <button type="submit">UPLOAD</button>
+                </form>
                 {% if prediction %}
                 <div class="result">
                     <h2>Prediction: {{ prediction }}</h2>
@@ -442,13 +520,65 @@ input[type="file"] {
             preview.src = URL.createObjectURL(event.target.files[0]);
             preview.style.display = 'block';
         }
+
         function updateFileName(event) {
             const fileNameElement = document.getElementById('file-name');
             const fileInput = event.target;
             const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file chosen';
             fileNameElement.textContent = fileName;
         }
+
+        function openModal() {
+            const modal = document.getElementById('webcamModal');
+            modal.style.display = 'flex';
+            startWebcam();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('webcamModal');
+            modal.style.display = 'none';
+            stopWebcam();
+        }
+
+        function startWebcam() {
+            const video = document.getElementById('webcam');
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                    videoStream = stream;
+                })
+                .catch(err => console.error("Error accessing webcam: ", err));
+        }
+
+        function stopWebcam() {
+            videoStream.getTracks().forEach(track => track.stop());
+        }
+
+        function captureImage() {
+            const video = document.getElementById('webcam');
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Convert the canvas to a Blob
+            canvas.toBlob(function (blob) {
+                const file = new File([blob], "captured_image.png", { type: "image/png" });
+
+                // Create a DataTransfer object to simulate file selection
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+
+                // Set the file input's files to the DataTransfer's files
+                const fileInput = document.querySelector('input[type="file"]');
+                fileInput.files = dataTransfer.files;
+
+                // Preview the captured image
+                previewImage({ target: fileInput });
+            });
+
+            closeModal();
+        }
     </script>
 </body>
 </html>
-

@@ -85,7 +85,7 @@ def corn_predict():
 
         image_path = 'uploads/' + filename
         
-        return render_template('corn_result.html', prediction=prediction, probability=probability, image_path=image_path)
+        return render_template('result.html', prediction=prediction, probability=probability, image_path=image_path)
     
     return redirect(request.url)
 
@@ -110,7 +110,7 @@ def corn_stem_predict():
 
         image_path = 'uploads/' + filename
         
-        return render_template('corn_result.html', prediction=prediction, probability=probability, image_path=image_path)
+        return render_template('result.html', prediction=prediction, probability=probability, image_path=image_path)
     
     return redirect(request.url)
  
@@ -137,7 +137,7 @@ def tomato_predict():
 
         image_path = 'uploads/' + filename
         
-        return render_template('tomato_result.html', prediction=prediction, spread_percentage=spread_percentage, category=category, image_path=image_path)
+        return render_template('result.html', prediction=prediction, spread_percentage=spread_percentage, category=category, image_path=image_path)
     
     return redirect(request.url)
 
@@ -163,7 +163,7 @@ def tomato_stem_predict():
 
         image_path = 'uploads/' + filename
 
-        return render_template('tomato_result.html', prediction=prediction, probability=probability, image_path=image_path)
+        return render_template('result.html', prediction=prediction, probability=probability, image_path=image_path)
     
     return redirect(request.url)
 
@@ -187,7 +187,7 @@ def potato_predict():
 
         image_path = 'uploads/' + filename
         
-        return render_template('potato_result.html', prediction=prediction, probability=probability, image_path=image_path)
+        return render_template('result.html', prediction=prediction, probability=probability, image_path=image_path)
     
     return redirect(request.url)
 
@@ -211,7 +211,7 @@ def potato_stem_predict():
 
         image_path = 'uploads/' + filename
 
-        return render_template('potato_result.html', prediction=prediction, probability=probability, image_path=image_path)
+        return render_template('result.html', prediction=prediction, probability=probability, image_path=image_path)
                                 
     return redirect(request.url)
 
@@ -235,7 +235,7 @@ def pepper_predict():
 
         image_path = 'uploads/' + filename
         
-        return render_template('pepper_result.html', prediction=prediction, probability=probability, image_path=image_path)
+        return render_template('result.html', prediction=prediction, probability=probability, image_path=image_path)
     
     return redirect(request.url)
 
@@ -259,7 +259,7 @@ def pepper_stem_predict():
 
         image_path = 'uploads/' + filename
 
-        return render_template('pepper_result.html', prediction=prediction, probability=probability, image_path=image_path)
+        return render_template('result.html', prediction=prediction, probability=probability, image_path=image_path)
                                 
     return redirect(request.url)
 
@@ -283,7 +283,7 @@ def banana_predict():
 
         image_path = 'uploads/' + filename
         
-        return render_template('banana_result.html', prediction=prediction, spread_percentage=spread_percentage, category=category, image_path=image_path)
+        return render_template('result.html', prediction=prediction, spread_percentage=spread_percentage, category=category, image_path=image_path)
     
     return redirect(request.url)
 

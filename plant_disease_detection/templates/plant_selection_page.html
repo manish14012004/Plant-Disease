@@ -2,19 +2,22 @@
 {% block content %}
 <header class="header">
   <div class="header-content">
-    <!-- Add an icon before the text -->
-    <i class="fas fa-seedling icon"></i>
-    <h1 class="site-title">AgroNourish</h1>
+      <!-- Replace icon with image -->
+      <img src="{{ url_for('static', filename='images/HEADER.png') }}" alt="Logo" class="header-image">
+      <h1 class="site-title">AgroNourish</h1>
   </div>
+  <nav class="nav">
+      <!-- Navigation links can be added here -->
+  </nav>
 </header>
 
 <!-- Adjust the top margin of the content to make room for the fixed header -->
 <div class="content" style="margin-top: 120px; text-align: center;">
 
   <!-- Section 1 -->
-  <div class="section" style="background-image: url('https://th.bing.com/th/id/OIP.wEUDafUut5ckEZ_ILLHm_wHaE8?rs=1&pid=ImgDetMain');">
+  <div class="section" style="background-image: url('{{ url_for('static', filename='images/tomato.jpg') }}');">
     <div class="image-content">
-      <img src="https://th.bing.com/th/id/OIP.wEUDafUut5ckEZ_ILLHm_wHaE8?rs=1&pid=ImgDetMain" alt="Tomato Disease">
+      <img src="{{ url_for('static', filename='images/tomato.jpg') }}" alt="Pepper Disease">
     </div>
     <div class="text-content">
       <h2 class="section-heading">Tomato Disease Detection</h2>
@@ -24,21 +27,21 @@
   </div>
 
   <!-- Section 2 -->
-  <div class="section" style="background-image: url('https://th.bing.com/th/id/R.7dcfab839a8887625166f23cd4d62de6?rik=FBi%2fmS2gT49C0w&riu=http%3a%2f%2fwww.texilaconnect.com%2fwp-content%2fuploads%2f2014%2f06%2fpotato-plant.jpg&ehk=BhOVUCIsckIvzgf4eHlLxbNULKMK9%2f%2flR%2f6utEraFEc%3d&risl=&pid=ImgRaw&r=0');">
+  <div class="section" style="background-image: url('{{ url_for('static', filename='images/potato.jpg') }}');">
     <div class="text-content">
       <h2 class="section-heading">Potato Disease Detection</h2>
       <p class="section-paragraph">Discover methods for identifying and treating diseases in potato crops to ensure a healthy harvest.</p>
       <a href="{{ url_for('potato_disease_detection') }}" class="btn btn-transparent">Start Diagnosis</a>
     </div>
     <div class="image-content">
-      <img src="https://th.bing.com/th/id/R.7dcfab839a8887625166f23cd4d62de6?rik=FBi%2fmS2gT49C0w&riu=http%3a%2f%2fwww.texilaconnect.com%2fwp-content%2fuploads%2f2014%2f06%2fpotato-plant.jpg&ehk=BhOVUCIsckIvzgf4eHlLxbNULKMK9%2f%2flR%2f6utEraFEc%3d&risl=&pid=ImgRaw&r=0" alt="Potato Disease">
+      <img src="{{ url_for('static', filename='images/potato.jpg') }}" alt="Pepper Disease">
     </div>
   </div>
 
   <!-- Section 3 -->
-  <div class="section" style="background-image: url('https://plantura.garden/uk/wp-content/uploads/sites/2/2022/04/corn-cob-1024x683.jpg?x96810');">
+  <div class="section" style="background-image: url('{{ url_for('static', filename='images/corn.jpg') }}');">
     <div class="image-content">
-      <img src="https://plantura.garden/uk/wp-content/uploads/sites/2/2022/04/corn-cob-1024x683.jpg?x96810" alt="Corn Disease">
+      <img src="{{ url_for('static', filename='images/corn.jpg') }}" alt="Pepper Disease">
     </div>
     <div class="text-content">
       <h2 class="section-heading">Corn Disease Detection</h2>
@@ -48,26 +51,27 @@
   </div>
 
   <!-- Section 4 -->
-  <div class="section" style="background-image: url('https://hortzone.com/wp-content/uploads/2021/04/15-Types-of-Pepper-Plants-to-Grow-in-Your-Garden.jpg');">
+  <div class="section" style="background-image: url('{{ url_for('static', filename='images/pepper.jpg') }}');">
     <div class="text-content">
       <h2 class="section-heading">Pepper Disease Detection</h2>
       <p class="section-paragraph">Find out how to detect and manage diseases in pepper plants with our effective diagnostic tools.</p>
       <a href="{{ url_for('pepper_disease_detection') }}" class="btn btn-transparent">Start Diagnosis</a>
     </div>
     <div class="image-content">
-      <img src="https://hortzone.com/wp-content/uploads/2021/04/15-Types-of-Pepper-Plants-to-Grow-in-Your-Garden.jpg" alt="Pepper Disease">
+      <img src="{{ url_for('static', filename='images/pepper.jpg') }}" alt="Pepper Disease">
     </div>
   </div>
 
    <!-- Section 5 -->
-   <div class="section" style="background-image: url('https://askthegreengenie.com/wp-content/uploads/2014/10/bananas1.jpg');">
+   <div class="section" style="background-image: url('{{ url_for('static', filename='images/banana.jpg') }}');">
+ 
     <div class="text-content">
       <h2 class="section-heading">Banana Disease Detection</h2>
       <p class="section-paragraph">Find out how to detect and manage diseases in banana plants with our effective diagnostic tools.</p>
       <a href="{{ url_for('banana_disease_detection') }}" class="btn btn-transparent">Start Diagnosis</a>
     </div>
     <div class="image-content">
-      <img src="https://askthegreengenie.com/wp-content/uploads/2014/10/bananas1.jpg" alt="Pepper Disease">
+      <img src="{{ url_for('static', filename='images/banana.jpg') }}" alt="Pepper Disease">
     </div>
   </div>
 
@@ -148,7 +152,8 @@
 
   .section-heading {
     font-size: 2em;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Raleway', sans-serif;
+
     color: #ffffff;
     margin-bottom: 10px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
@@ -159,7 +164,8 @@
     font-size: 1.2em;
     color: #ffffff;
     line-height: 1.6;
-    font-family: 'Circular Std', sans-serif; /* Circular font */
+    font-family: 'Raleway', sans-serif;
+
   }
 
   .btn-transparent {
@@ -216,39 +222,42 @@
     z-index: 1; /* Ensure text is above the highlight effect */
   }
 
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #16a085;
-    padding: 20px 40px;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  }
+  /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(22, 160, 133, 0.8); /* Transparent background */
+            padding: 20px 40px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px); /* Glass effect */
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-image {
+            width: 4em; /* Size of the image to match the icon */
+            height: 4em; /* Size of the image to match the icon */
+            margin-right: 10px;
+        }
+        
+        .site-title {
+            font-size: 2.5em;
+            font-family: 'Raleway', sans-serif;
 
-  .header-content {
-    display: flex;
-    align-items: center;
-  }
-
-  .icon {
-    font-size: 2em;
-    color: white;
-    margin-right: 10px;
-  }
-
-  .site-title {
-    font-size: 2.5em;
-    font-family: 'Verdana', sans-serif;
-    color: white;
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    font-weight: normal;
-  }
+            color: white;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: normal;
+        }
 </style>
 
 {% endblock %}

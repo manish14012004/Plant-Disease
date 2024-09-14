@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌱Corn Disease Detection</title>
+    <title>Corn</title>
+    <link rel="icon" type="image/jpg" href = "static/images/favicon.jpg">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
        
@@ -20,44 +23,46 @@ body {
     background-repeat: no-repeat;
     height: 100vh;
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Raleway', sans-serif;
+
 }
 
 /* Header Styles */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #16a085; /* Transparent background */
-    padding: 20px 40px;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px); /* Glass effect */
-}
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(22, 160, 133, 0.8); /* Transparent background */
+            padding: 20px 40px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px); /* Glass effect */
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-image {
+            width: 4em; /* Size of the image to match the icon */
+            height: 4em; /* Size of the image to match the icon */
+            margin-right: 10px;
+        }
+        
+        .site-title {
+            font-size: 2.5em;
+            font-family: 'Raleway', sans-serif;
 
-.header-content {
-    display: flex;
-    align-items: center;
-}
-
-.icon {
-    font-size: 2em;
-    color: white;
-    margin-right: 10px;
-}
-
-.site-title {
-    font-size: 2.5em;
-    font-family: 'Verdana', sans-serif;
-    color: white;
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    font-weight: normal;
-}
+            color: white;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: normal;
+        }
 
 /* Container Styles */
 .container {
@@ -126,7 +131,8 @@ body {
     color: #fff;
     margin-bottom: 20px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    font-family: 'Circular Std', 'Arial', sans-serif;
+    font-family: 'Raleway', sans-serif;
+
 }
 
 .left-container p {
@@ -139,7 +145,8 @@ body {
     max-width: 90%;
     margin-bottom: 30px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    font-family: 'Circular Std', 'Arial', sans-serif;
+    font-family: 'Raleway', sans-serif;
+
     text-align: left;
 }
 
@@ -227,7 +234,8 @@ body {
     color: #000;
     margin-bottom: 20px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    font-family: 'Circular Std', 'Arial', sans-serif;
+    font-family: 'Raleway', sans-serif;
+
     position: relative;
     z-index: 1;
 }
@@ -435,9 +443,13 @@ input[type="file"] {
 <body>
     <header class="header">
         <div class="header-content">
-            <i class="fas fa-seedling icon"></i>
+            <!-- Replace icon with image -->
+            <img src="{{ url_for('static', filename='images/HEADER.png') }}" alt="Logo" class="header-image">
             <h1 class="site-title">AgroNourish</h1>
         </div>
+        <nav class="nav">
+            <!-- Navigation links can be added here -->
+        </nav>
     </header>
     <div class="container">
         <div class="left-container">

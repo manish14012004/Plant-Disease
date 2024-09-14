@@ -5,13 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>Fertilizer Recommendation</title>
+    <link rel="icon" type="image/jpg" href = "static/images/favicon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
+    <title>AgroNourish</title>
     <style>
+        
         /* Global Styles */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Raleway', sans-serif;
+
             background-color: #e9f7ef;
             color: #333;
         }
@@ -22,29 +27,31 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #16a085;
+            background: rgba(22, 160, 133, 0.8); /* Transparent background */
             padding: 20px 40px;
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px); /* Glass effect */
         }
-
+        
         .header-content {
             display: flex;
             align-items: center;
         }
-
-        .icon {
-            font-size: 2em;
-            color: white;
+        
+        .header-image {
+            width: 4em; /* Size of the image to match the icon */
+            height: 4em; /* Size of the image to match the icon */
             margin-right: 10px;
         }
-
+        
         .site-title {
             font-size: 2.5em;
-            font-family: 'Verdana', sans-serif;
+            font-family: 'Raleway', sans-serif;
+
             color: white;
             margin: 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -237,33 +244,25 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <i class="fas fa-seedling icon"></i>
+            <!-- Replace icon with image -->
+            <img src="{{ url_for('static', filename='images/HEADER.png') }}" alt="Logo" class="header-image">
             <h1 class="site-title">AgroNourish</h1>
-            <nav class="nav">
-                <a href="#home" class="nav-link">
-                    <span class="tooltip">⌂</span>
-                </a>
-                <a href="#plant" class="nav-link">
-                    <span class="tooltip">⌕</span>
-                </a>
-                <a href="#fertilizer" class="nav-link">
-                    <span class="tooltip">⚛</span>
-                </a>
-            </nav>
         </div>
+        <nav class="nav">
+            <!-- Navigation links can be added here -->
+        </nav>
     </header>
 
     <div style="height: 88px;" id="home"></div>
 
     <!-- First Banner -->
-    <div class="banner" style="background-image: url('https://www.forfarming.co/wp-content/uploads/2022/03/Importance-and-Benefits-of-Disease-Diagnosis-with-AI.png');" id="home">
-        <div class="image-container"></div>
+    <div class="banner" style="background-image: url('{{ url_for('static', filename='images/nourish.jpg') }}');">
         <div class="text-container">
             <h1 class="banner-heading">Nourish Your Crops with Precision</h1>
             <p class="banner-paragraph">
                 Diagnose, Treat, and Enhance the Health of Your Crops with Advanced Technology and Expertise.
             </p>
-            <a href="plant" class="btn-transparent">LEARN MORE →</a>
+            <a href="{{ url_for('learn_more_page') }}" class="btn-transparent">LEARN MORE →</a>
             
         </div>
     </div>
@@ -272,7 +271,7 @@
     <div class="divider"></div>
 
     <!-- Second Banner -->
-    <div class="banner" id="plant"style="background-image: url('https://www.softwebsolutions.com/wp-content/uploads/2019/08/Plant-Disease-Detection.jpg');">
+    <div class="banner" style="background-image: url('{{ url_for('static', filename='images/detection.jpg') }}');">
         <div class="text-container">
             <h2 class="banner-heading">Plant Disease Detection</h2>
             <p class="banner-paragraph">
@@ -286,13 +285,13 @@
     <div class="divider"></div>
 
     <!-- Third Banner -->
-    <div class="banner"id="fertilizer" style="background-image: url('https://media.istockphoto.com/id/1307039908/photo/senior-woman-applying-fertilizer-plant-food-to-soil-for-vegetable-and-flower-garden.jpg?s=612x612&w=0&k=20&c=QQGmR0jfRWg_Q2s1X78xLW-ZaDSuHZS4EIQtuNbszFI=');">
+    <div class="banner" style="background-image: url('{{ url_for('static', filename='images/fertrecomm.jpg') }}');">
         <div class="text-container">
             <h2 class="banner-heading">Fertilizer Recommendation</h2>
             <p class="banner-paragraph">
                 Get personalized fertilizer recommendations based on disease detection and spread percentage to optimize crop health and yield.
             </p>
-            <a href="{{ url_for('fertilizer_predict') }}" class="btn-transparent">Explore →</a>
+            <a href="{{ url_for('fertilizer') }}" class="btn-transparent">EXPLORE →</a>
         </div>
     </div>
 
