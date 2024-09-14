@@ -1,4 +1,4 @@
-#Plant Disease Detection using AI and Machine Learning
+#Plant Disease Detection 
 
 Overview
 
