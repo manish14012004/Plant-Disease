@@ -3,80 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nearby Fertilizer and Pesticide Shops</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <title>🌱Tomato Disease Detection</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-      body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-  }
-  
-  h1 {
-      color: #333;
-      margin: 20px 0;
-  }
-  
-  #map {
-      width: 80%;
-      height: 500px;
-      border: 1px solid #ccc;
-  }
-  </style>
+        /* Include updated CSS here */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body {
+            background-color: #e9f7ef;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(22, 160, 133, 0.8); /* Transparent background */
+            padding: 20px 40px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px); /* Glass effect */
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-image {
+            width: 4em; /* Size of the image to match the icon */
+            height: 4em; /* Size of the image to match the icon */
+            margin-right: 10px;
+        }
+        
+        .site-title {
+            font-size: 2.5em;
+            font-family: 'Raleway', sans-serif;
+            color: white;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: normal;
+        }
+        
+        .container {
+            display: flex;
+            width: 90%;
+            height: calc(130vh - 140px);
+            margin: 120px auto 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .left-container,
+        .right-container {
+            flex: 1;
+            padding: 30px; /* Increased padding for more space */
+            margin: 10px;
+            box-sizing: border-box;
+            border-radius: 15px;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .left-container {
+            background-image: url('https://media.istockphoto.com/id/171579643/photo/tomato-greenhouse.jpg?s=612x612&w=0&k=20&c=BLtIrrBprkZlIHNfSYIhkm3aebVUjqxsS-Yoqa1ss08=');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .right-container {
+            background: rgba(255, 255, 255, 0.6); /* Glassy white background */
+            backdrop-filter: blur(10px); /* Glass effect */
+            color: #333; /* Dark text color for better readability */
+        }
+        
+        .left-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Darker transparent overlay */
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .left-container h1 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            position: relative;
+            z-index: 2;
+        }
+        .right-container h1 {
+            color: back;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            position: relative;
+            z-index: 2;
+        }
+        
+        
+        form {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Slightly opaque background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        form label {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        form input[type="text"],
+        form select {
+            width: calc(100% - 22px); /* Full width minus padding */
+            padding: 10px;
+            border: 2px solid #16a085;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+        
+        form input[type="text"]:focus,
+        form select:focus {
+            border-color: #16a085;
+            outline: none;
+        }
+        
+        form input[type="submit"] {
+            background-color: #16a085;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        
+        form input[type="submit"]:hover {
+            background-color: #148f77;
+        }
+        
+        .suggested-fertilizer {
+            color: #333; /* Dark text color for better readability */
+            margin: 20px 0;
+            font-size: 2em;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .back-to-home {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #16a085;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .back-to-home:hover {
+            background-color: #148f77;
+        }
+        
+    </style>
 </head>
 <body>
-    <h1>Nearby Fertilizer and Pesticide Shops</h1>
-    <div id="map"></div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <header class="header">
+        <div class="header-content">
+            <img src="{{ url_for('static', filename='images/HEADER.png') }}"  alt="Logo" class="header-image">
+            <h1 class="site-title">AgroNourish</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Left Container -->
+        <div class="left-container">
+            <h1>FERTILIZER RECOMMENDATION</h1>
+            <form method="POST" action="{{url_for('home')}}">
+                <label for="Temp">Temperature (in Celsius)</label>
+                <input type="text" id="Temp" name="a" required="required" placeholder="enter 1">
+
+                <label for="Humidity">Humidity value (in %)</label>
+                <input type="text" id="Humidity" name="b" required="required" placeholder="enter 2">
+
+                <label for="Moisture">Moisture value</label>
+                <input type="text" id="Moisture" name="c" required="required" placeholder="enter 3">
+
+                <label for="SoilType">Soil Type</label>
+                <select id="SoilType" name="d">
+                    <option value="">select</option>
+                    <option value="0">Black</option>
+                    <option value="1">Clayey</option>
+                    <option value="2">Loamy</option>
+                    <option value="3">Red</option>
+                    <option value="4">Sandy</option>
+                </select>
+
+                <label for="CropType">Crop Type</label>
+                <select id="CropType" name="e">
+                    <option value="">select</option>
+                    <option value="0">Barley</option>
+                    <option value="1">Cotton</option>
+                    <option value="2">Ground Nuts</option>
+                    <option value="3">Maize</option>
+                    <option value="4">Millets</option>
+                    <option value="5">Oil Seeds</option>
+                    <option value="6">Paddy</option>
+                    <option value="7">Pulses</option>
+                    <option value="8">Sugarcane</option>
+                    <option value="9">Tobacco</option>
+                    <option value="10">Wheat</option>
+                </select>
+
+                <label for="Nitrogen">Nitrogen value</label>
+                <input type="text" id="Nitrogen" name="f" required="required" placeholder="enter 6">
+
+                <label for="Potassium">Potassium value</label>
+                <input type="text" id="Potassium" name="g" required="required" placeholder="enter 7">
+
+                <label for="Phosphorus">Phosphorus value</label>
+                <input type="text" id="Phosphorus" name="h" required="required" placeholder="enter 8">
+
+                <input id="submit" type="submit" value="Predict">
+            </form>
+        </div>
+
+        <!-- Right Container -->
+        <div class="right-container hidden" id="right-container">
+            <div id="results">
+                <h1>Suggested Fertilizer</h1>
+                <p class="suggested-fertilizer" id="fertilizer"></p>
+                <a href="/" class="back-to-home">Back to Home</a>
+            </div>
+        </div>
+    </div>
+
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        // Initialize the map and set its view to a default location
-        const map = L.map('map').setView([0, 0], 13);
-    
-        // Load and display tile layers from OpenStreetMap
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-        }).addTo(map);
-    
-        // Use Geolocation API to get the user's current position
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
-    
-                // Update map view to user's location
-                map.setView([lat, lon], 15);
-    
-                // Add a marker for the user's current location
-                L.marker([lat, lon]).addTo(map)
-                    .bindPopup("You are here")
-                    .openPopup();
-    
-                // Simulated nearby shops data (in a real app, this data should come from a database or an API)
-                const shops = [
-                    { name: "Fertilizer Shop A", lat: lat + 0.01, lon: lon + 0.01 },
-                    { name: "Pesticide Shop B", lat: lat - 0.01, lon: lon - 0.01 },
-                    { name: "Fertilizer Shop C", lat: lat + 0.02, lon: lon - 0.02 },
-                ];
-    
-                // Add markers for nearby shops
-                shops.forEach(shop => {
-                    L.marker([shop.lat, shop.lon]).addTo(map)
-                        .bindPopup(shop.name)
-                        .openPopup();
-                });
-            });
-        } else {
-            alert("Geolocation is not supported by this browser.");
+        // JavaScript to toggle visibility of the right container
+        function displayRightContainer() {
+            var rightContainer = document.getElementById('right-container');
+            var fertilizer = document.getElementById('fertilizer').innerText;
+
+            // Check if fertilizer value is available
+            if (fertilizer) {
+                rightContainer.classList.remove('hidden');
+            } else {
+                rightContainer.classList.add('hidden');
+            }
         }
-    });
-    
+
+        // Call the function to check and display right container
+        displayRightContainer();
     </script>
 </body>
 </html>

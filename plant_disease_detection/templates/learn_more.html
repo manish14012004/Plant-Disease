@@ -1,280 +1,221 @@
-{% extends "base.html" %}
-{% block content %}
-<header class="header">
-  <div class="header-content">
-      <!-- Replace icon with image -->
-      <img src="{{ url_for('static', filename='images/HEADER.png') }}" alt="Logo" class="header-image">
-      <h1 class="site-title">AgroNourish</h1>
-  </div>
-  <nav class="nav">
-      <!-- Navigation links can be added here -->
-  </nav>
-</header>
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- Adjust the top margin of the content to make room for the fixed header -->
-<div class="content" style="margin-top: 120px; text-align: center;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" type="image/jpg" href="static/images/favicon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Section 1 -->
-  <div class="section" >
-    <div class="image-content">
-      <img src="{{ url_for('static', filename='images/STEP1.png') }}" alt="Pepper Disease">
-    </div>
-    <div class="text-content">
-      <h2 class="section-heading">Step 1: Select the Crop for Diagnosis</h2>
-      <p class="section-paragraph">To begin the diagnostic process, please choose the specific crop you wish to assess. This selection will allow us to tailor the diagnostic tools and recommendations to your chosen crop, ensuring accurate and relevant results. Ensure you select the correct crop type to receive precise and effective diagnostic information.</p>
-      
-    </div>
-  </div>
+    <title>AgroNourish</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            background-color: #e9f7ef;
+            color: #333;
+        }
 
-  <!-- Section 2 -->
-  <div class="section">
-    <div class="text-content">
-      <h2 class="section-heading">Potato Disease Detection</h2>
-      <p class="section-paragraph">Discover methods for identifying and treating diseases in potato crops to ensure a healthy harvest.</p>
-      
-    </div>
-    <div class="image-content">
-      <img src="{{ url_for('static', filename='images/potato.jpg') }}" alt="Pepper Disease">
-    </div>
-  </div>
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(22, 160, 133, 0.8); /* Transparent background */
+            padding: 20px 40px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px); /* Glass effect */
+        }
 
-  <!-- Section 3 -->
-  <div class="section" >
-    <div class="image-content">
-      <img src="{{ url_for('static', filename='images/corn.jpg') }}" alt="Pepper Disease">
-    </div>
-    <div class="text-content">
-      <h2 class="section-heading">Corn Disease Detection</h2>
-      <p class="section-paragraph">Identify and treat diseases affecting corn crops with our specialized diagnostic tools and resources.</p>
-      
-    </div>
-  </div>
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
 
-  <!-- Section 4 -->
-  <div class="section" >
-    <div class="text-content">
-      <h2 class="section-heading">Pepper Disease Detection</h2>
-      <p class="section-paragraph">Find out how to detect and manage diseases in pepper plants with our effective diagnostic tools.</p>
-      
-    </div>
-    <div class="image-content">
-      <img src="{{ url_for('static', filename='images/pepper.jpg') }}" alt="Pepper Disease">
-    </div>
-  </div>
+        .header-image {
+            width: 4em;
+            height: 4em;
+            margin-right: 10px;
+        }
 
-   <!-- Section 5 -->
-   <div class="section" >
- 
-    <div class="text-content">
-      <h2 class="section-heading">Banana Disease Detection</h2>
-      <p class="section-paragraph">Find out how to detect and manage diseases in banana plants with our effective diagnostic tools.</p>
-      
-    </div>
-    <div class="image-content">
-      <img src="{{ url_for('static', filename='images/banana.jpg') }}" alt="Pepper Disease">
-    </div>
-  </div>
+        .site-title {
+            font-size: 2.5em;
+            font-family: 'Raleway', sans-serif;
+            color: white;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: normal;
+        }
 
-</div>
-
-<style>
-  body {
-    background-color: #e9f7ef;
-  }
-
-  .section {
-    position: relative;
-    padding: 40px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-size: cover;
-    background-position: center;
-    background-color: #e9f7ef;
-    overflow: hidden;
-    margin-bottom: 40px;
-    /* Remove fixed height */
-  }
-
-  .section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-   
-    z-index: 1;
-  }
-
-  .text-content, .image-content {
-    position: relative;
-    z-index: 2;
-  }
-
-  .text-content {
-    max-width: 50%; /* Set a maximum width for text content */
-    padding: 20px;
-  }
-
-  .image-content {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .image-content img {
-    width: 100%; /* Ensure the image fills the container width */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 100%; /* Ensure the image does not exceed container height */
-    object-fit: cover; /* Cover the container while maintaining aspect ratio */
-    border-radius: 10px;
-    border: 2px solid #fff;
-  }
-
-  .section:nth-of-type(odd) .image-content {
-    order: 1; /* Move image to the left for odd sections */
-  }
-
-  .section:nth-of-type(odd) .text-content {
-    order: 0; /* Move text to the right for odd sections */
-  }
-
-  .section:nth-of-type(even) .image-content {
-    order: 0; /* Move image to the right for even sections */
-  }
-
-  .section:nth-of-type(even) .text-content {
-    order: 1; /* Move text to the left for even sections */
-  }
-
-  .section-heading {
-    font-size: 2em;
-    font-family: 'Arial', sans-serif;
-    color: black;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    font-weight: bold;
-  }
-
-  .section-paragraph {
-    font-size: 1.2em;
-    color: black;
-    line-height: 1.6;
-    font-family: 'Circular Std', sans-serif; /* Circular font */
-  }
-
-  .btn-transparent {
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 1.2em;
-    font-weight: bold;
-    text-decoration: none;
-    color: #fff;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)); /* Gradient background */
-    border: 2px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-transparent::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300%;
-    height: 300%;
-    background: rgba(255, 255, 255, 0.1); /* Light highlight effect */
-    transition: all 0.4s ease;
-    transform: translate(-50%, -50%) scale(0);
-    border-radius: 50%;
-    z-index: 0;
-  }
-
-  .btn-transparent:hover::before {
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  .btn-transparent:hover {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)); /* Darker gradient on hover */
-    color: #fff;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Enhanced shadow on hover */
-    transform: translateY(-2px); /* Slight lift effect */
-    border-color: rgba(255, 255, 255, 0.7); /* Lighter border on hover */
-  }
-
-  .btn-transparent:active {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)); /* Slightly darker on click */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Reduced shadow on click */
-    transform: translateY(0); /* Reset lift effect */
-    border-color: rgba(255, 255, 255, 0.5); /* Reset border color on click */
-  }
-
-  .btn-transparent span {
-    position: relative;
-    z-index: 1; /* Ensure text is above the highlight effect */
-  }
-
-  /* Header Styles */
-  .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(22, 160, 133, 0.8); /* Transparent background */
-      padding: 20px 40px;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px); /* Glass effect */
-  }
-  
-  .header-content {
-      display: flex;
-      align-items: center;
-  }
-  
-  .header-image {
-      width: 4em; /* Size of the image to match the icon */
-      height: 4em; /* Size of the image to match the icon */
-      margin-right: 10px;
-  }
-  
-  .site-title {
-      font-size: 2.5em;
-      font-family: 'Verdana', sans-serif;
-      color: white;
-      margin: 0;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      font-weight: normal;
-  }
-
-
+        /* Navigation Styles */
         .nav {
             display: flex;
+            align-items: center;
+            justify-content: flex-end;
         }
 
-        .nav a {
-            color: #fff;
+        .nav-link {
+            color: white;
             text-decoration: none;
-            padding: 0 15px;
-            font-size: 1em;
+            font-size: 1.2em;
+            margin-left: 20px;
+            position: relative;
+            padding: 10px 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
-        .nav a:hover {
-            text-decoration: underline;
+        /* Divider Styles */
+        .divider {
+            height: 4px;
+            background-color: #e9f7ef;
+            width: 100%;
         }
 
-        .content {
-            margin-top: 120px; /* Adjusted margin for the fixed header */
+        /* Banner Styles */
+        .banner {
+            display: flex;
+            width: 98.8vw;
+            height: 88vh;
+            position: relative;
+            align-items: center;
+            justify-content: center;
         }
 
-</style>
-{% endblock %}
+        .banner:nth-child(even) {
+            flex-direction: row-reverse; /* Alternate the content */
+        }
+
+        .banner .image-container {
+            width: 45%; /* Make image a bit smaller */
+            height: 93%; /* Adjust height */
+            background-position: center;
+            background-size: cover;
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow */
+        }
+
+        .text-container {
+            width: 50%;
+            padding: 20px;
+            text-align:left;
+        }
+
+        .text1-container {
+          width: 50%;
+          padding: 20px;
+          text-align:right;
+      }
+
+        .banner-heading {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #333;
+            margin: 0;
+        }
+
+        .banner-paragraph {
+            font-size: 1.2rem;
+            color: #333;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .banner {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .text-container, .image-container {
+                width: 100%;
+            }
+
+            .image-container {
+                height: 40vh;
+                border-radius: 15px; /* Slightly rounded corners for mobile */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <img src="{{ url_for('static', filename='images/HEADER.png') }}" alt="Logo" class="header-image">
+            <h1 class="site-title">AgroNourish</h1>
+        </div>
+        <nav class="nav"></nav>
+    </header>
+
+    <div style="height: 88px;" id="home"></div>
+
+    <!-- First Banner (Image on Right, Text on Left) -->
+    <div class="banner">
+        <div class="text-container">
+            <h1 class="banner-heading">ABOUT US</h1>
+            <p class="banner-paragraph">At AgroNourish, we're committed to revolutionizing agriculture with cutting-edge technology. Our platform leverages advanced AI to detect plant diseases, offering farmers real-time insights and solutions. By quickly identifying issues, we help you make timely decisions, reducing crop loss and enhancing yield.
+
+              Our mission is to empower farmers and agricultural businesses with the tools they need to ensure healthy, thriving crops. With our user-friendly diagnostics and personalized fertilizer recommendations, we aim to foster sustainable farming practices for a greener future.
+              
+              Join us in nurturing crops with precision and expertise!</p>
+        </div>
+        <div class="image-container" style="background-image: url('{{ url_for('static', filename='images/banner1.jpg') }}');"></div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Second Banner (Image on Left, Text on Right) -->
+    <div class="banner">
+        <div class="image-container" style="background-image: url('{{ url_for('static', filename='images/banner2.jpg') }}');"></div>
+        <div class="text1-container">
+            <h2 class="banner-heading">OUR AIM</h2>
+            <p class="banner-paragraph">At AgroNourish, our primary goal is to empower farmers, gardeners, and agricultural professionals with cutting-edge technology to safeguard plant health and maximize crop yield. We aim to:
+
+              Provide Accurate Disease Detection: Utilize advanced AI and machine learning models to quickly and accurately identify plant diseases from images. Our technology ensures that users receive reliable diagnostics to address plant health issues promptly.
+              
+              Enhance Crop Management: Offer actionable insights and recommendations based on disease detection, including tailored treatment options and preventive measures. Our solutions help users take informed actions to manage and mitigate plant diseases effectively.
+              
+              Promote Sustainable Agriculture: Support sustainable farming practices by providing tools that help in early disease detection and precise treatment application, reducing the need for excessive chemical use and promoting healthier crops.</p>
+        </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Third Banner (Image on Right, Text on Left) -->
+    <div class="banner">
+        <div class="text-container">
+            <h2 class="banner-heading">OBJECTIVES</h2>
+            <p class="banner-paragraph">Accurate Disease Identification:
+
+              Implement advanced image recognition and AI algorithms to achieve high accuracy in diagnosing plant diseases from uploaded images.
+              Continuously update and expand the disease database to cover a wide range of plant species and diseases.
+              Timely and Actionable Insights:
+              
+              Provide users with real-time results and actionable recommendations for disease management based on detected conditions.
+              Offer guidance on effective treatment options and preventive measures tailored to the specific disease and plant type.
+              User-Friendly Interface:
+              
+              Develop a simple, intuitive interface that allows users to easily upload images, access results, and navigate the website.
+              Ensure the platform is accessible to users with varying levels of technical expertise.</p>
+        </div>
+        <div class="image-container" style="background-image: url('{{ url_for('static', filename='images/banner3.jpg') }}');"></div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+</body>
+
+</html>
