@@ -14,7 +14,11 @@ disease_name_mapping = {
     "Tomato Septoria Leaf Spot": 4,
     "Tomato Alternaria Canker": 5,
     "Tomato Southern Blight": 6,
-    "Tomato Timber Rot": 7
+    "Tomato Timber Rot": 7,
+    "cordana" : 8,
+    "healthy" : 9,
+    "pestalotiopsis" : 10,
+    "sigatoka" : 11
     # Add all other disease names your model handles
 }
 

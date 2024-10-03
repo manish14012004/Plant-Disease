@@ -9,10 +9,10 @@ banana_leaf = load_model('banana_leaf.keras')
 
 # Dictionary for class references
 ref ={
- 0: 'Banana Cordana',
- 1: 'Banana Healthy',
- 2: 'Banana Pestalotiopsis',
- 3: 'Banana Sigatoka',
+ 0: 'cordana',
+ 1: 'healthy',
+ 2: 'pestalotiopsis',
+ 3: 'sigatoka',
  } 
 
 # Function to calculate disease spread percentage
