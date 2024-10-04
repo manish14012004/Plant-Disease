@@ -8,13 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 
     <title>Fertilizer Report</title>
-    <link rel="icon" type="image/jpg" href = "static/images/favicon.jpg">
+    <link rel="icon" type="image/jpg" href="static/images/favicon.jpg">
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: 'Raleway', sans-serif;
-
             background-color: #e9f7ef;
             color: #000;
             height: 100vh;
@@ -22,41 +21,38 @@
             flex-direction: column;
         }
 
-        /* Header Styles */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(22, 160, 133, 0.8); /* Transparent background */
+            background: rgba(22, 160, 133, 0.8);
             padding: 20px 40px;
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: space-between;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px); /* Glass effect */
+            backdrop-filter: blur(10px);
         }
-        
+
         .header-content {
             display: flex;
             align-items: center;
         }
-        
+
         .header-image {
-            width: 4em; /* Size of the image to match the icon */
-            height: 4em; /* Size of the image to match the icon */
+            width: 4em;
+            height: 4em;
             margin-right: 10px;
         }
-        
+
         .site-title {
             font-size: 2.5em;
             font-family: 'Raleway', sans-serif;
-
             color: white;
             margin: 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            font-weight: normal;
         }
 
         .container {
@@ -81,7 +77,6 @@
             width: 200px;
             height: 150px;
             margin-right: 20px;
-            
         }
 
         .report-title {
@@ -114,6 +109,18 @@
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
+        h1.section-headingo {
+            text-align: left;
+            color: #000;
+            margin-bottom: 0px;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 2px solid #16a085;
+            padding-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
         .content-section {
             display: flex;
             justify-content: space-between;
@@ -137,14 +144,70 @@
             margin: 0;
             padding: 10px;
             border-bottom: 1px solid #16a085;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .cause-description-section p {
-            border-bottom: none;
-            text-shadow: none;
+        /* Timeline */
+        .timeline {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 40px;
+            position: relative;
         }
 
+        .timeline-event {
+            position: relative;
+            width: 30%;
+            text-align: center;
+        }
+
+        .timeline-event h4 {
+            font-weight: bold;
+            color: #16a085;
+            margin: 0;
+        }
+
+        .timeline-event p {
+            margin: 10px 0 3px 0; /* Adjusted top margin to 10px, bottom margin remains 3px */
+            color: white;
+            font-size: 19px; /* Increase the font size as needed */
+            background-color: rgba(22, 160, 133, 0.8); /* Adjust color and transparency as needed */
+            padding: 10px; /* Add padding for better visual effect */
+            border-radius: 4px; /* Optional: Add rounded corners */
+        }
+        
+        
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #16a085;
+            z-index: 1;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 0%; /* Start at 0% */
+            height: 30px;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            line-height: 30px;
+            transition: width 2s ease;
+        }
+
+        /* Button Styling */
         .button-group {
             display: flex;
             justify-content: center;
@@ -177,7 +240,8 @@
                 visibility: hidden;
             }
 
-            .container, .container * {
+            .container,
+            .container * {
                 visibility: visible;
                 text-shadow: none !important;
                 background: transparent !important;
@@ -216,13 +280,9 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <!-- Replace icon with image -->
             <img src="{{ url_for('static', filename='images/HEADER.png') }}" alt="Logo" class="header-image">
             <h1 class="site-title">AgroNourish</h1>
         </div>
-        <nav class="nav">
-            <!-- Navigation links can be added here -->
-        </nav>
     </header>
 
     <div class="container">
@@ -240,65 +300,104 @@
         <h1 class="section-heading">Disease Detected</h1>
 
         <div class="content-section">
-            <h3>DISEASE:</h3>
-            <p>{{ prediction }}</p>
+            <h3>Disease Name:</h3>
+            <p id="diseaseName">{{ prediction }}</p>
         </div>
 
         <div class="content-section">
-            <h3>SPREAD PERCENTAGE:</h3>
-            <p>{{ spread_percentage }} %</p>
+            <h3>Spread Percentage:</h3>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
         </div>
 
-        <h1 class="section-heading">Solution</h1>
-
         <div class="content-section">
-            <h3>FERTILIZER NAME:</h3>
+            <h3>Fertilizer Recommendation:</h3>
             <p>{{ fertilizer_name }}</p>
         </div>
 
-        <div class="content-section">
-            <h3>COMMON NAME:</h3>
-            <p>{{ common_name }}</p>
+        <!-- Timeline Section -->
+        <h1 class="section-headingo">Application Timeline</h1>
+        
+        <div class="timeline">
+         <div class="timeline-event">
+             <h3>APPLICATION DATE</h4>
+             <p id="applicationDate"></p> <!-- Added ID for the application date -->
+         </div>
+         <div class="timeline-event">
+             <h3>REI (HOURS)</h4>
+             <p>{{ rei }}</p>
+          </div>
+       <div class="timeline-event">
+               <h3>PHI (DAYS)</h4>
+               <p>{{ phi }}</p>
+         </div>
         </div>
-
-        <div class="content-section">
-            <h3>REI:</h3>
-            <p>{{ rei }}</p>
-        </div>
-
-        <div class="content-section">
-            <h3>PHI:</h3>
-            <p>{{ phi }}</p>
-        </div>
+       
+            <p>NOTE*</p>
+     
+        <p>1.REI (Restricted Entry Interval): REI refers to the minimum amount of time that must pass after a pesticide or chemical has been applied to a crop before it is safe for workers to re-enter the treated area without protective gear.</p>
+        <p>2.PHI (Pre-Harvest Interval): PHI refers to the minimum number of days that must pass after a pesticide or chemical has been applied before the crop can be harvested. This ensures that pesticide residues degrade to acceptable levels before the crop is consumed.</p>
 
         <h1 class="section-heading">What Caused It?</h1>
-
-        <div class="content-section cause-description-section">
+        <div class="content-section">
+            <h3>Cause:</h3>
             <p>{{ cause_description }}</p>
         </div>
 
+        
+
         <div class="button-group">
-            <button onclick="goHome()">⌂ HOME</button>
-            <button onclick="printReport()">⎙ PRINT</button>
+            <button onclick="printReport()">Print Report</button>
+            <button onclick="goBack()">Back</button>
         </div>
     </div>
 
     <script>
-        function goHome() {
-            window.location.href = '/';
+        // Display current date
+        document.getElementById('currentDate').innerText = new Date().toLocaleDateString();
+    
+        // Display application date
+        document.getElementById('applicationDate').innerText = new Date().toLocaleDateString(); // New line added
+    
+        // Simulate progress bar update
+        function animateProgressBar(percentage) {
+            const progressBar = document.getElementById('progressBar');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= percentage) {
+                    clearInterval(interval);
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                    progressBar.innerText = width + '%';
+                    // Change color based on width
+                    if (width <= 30) {
+                        progressBar.style.backgroundColor = 'green'; // 0-30%
+                    } else if (width <= 60) {
+                        progressBar.style.backgroundColor = 'yellow'; // 31-60%
+                    } else if (width <= 90) {
+                        progressBar.style.backgroundColor = 'orange'; // 61-90%
+                    } else {
+                        progressBar.style.backgroundColor = 'red'; // 91-100%
+                    }
+                }
+            }, 20); // Adjust speed of animation
         }
-
+    
+        // Start the animation with the spread percentage from the server
+        const spreadPercentage = {{ spread_percentage }};
+        animateProgressBar(spreadPercentage);
+    
         function printReport() {
             window.print();
         }
-
-        // Set current date in the report header
-        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-GB', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
+    
+        function goBack() {
+            window.history.back();
+        }
     </script>
+    
 </body>
 
 </html>
